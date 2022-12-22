@@ -70,7 +70,7 @@ elseif (isset($_GET['FestivalFounded'])):
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                         </div>
-                                        <input type="text" class="form-control ltr" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask="" placeholder="حتما به این صورت وارد شود: <?php echo $date ?>">
+                                        <input type="text" name="start_date" class="form-control ltr" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask="" placeholder="حتما به این صورت وارد شود: <?php echo $date ?>">
                                     </div>
                                     <!-- /.input group -->
                             </td>
@@ -122,7 +122,7 @@ elseif (isset($_GET['FestivalFounded'])):
                             <tr>
                                 <td><?php echo $a;$a++; ?></td>
                                 <td><?php echo $festivals['name']; ?></td>
-                                <td><?php echo $festivals['start_date']?></td>
+                                <td><?php echo substr($festivals['start_date'],0,10) ?></td>
                                 <td>
                                     <?php
                                     $starter=$festivals['starter'];
@@ -131,7 +131,7 @@ elseif (isset($_GET['FestivalFounded'])):
                                     echo @$starter['name'].' '.@$starter['family'];
                                     ?>
                                 </td>
-                                <td><?php echo $festivals['extension_date'] ?></td>
+                                <td><?php echo substr($festivals['extension_date'],0,10) ?></td>
                                 <td>
                                     <?php
                                     $extensioner=$festivals['extensioner'];
@@ -140,7 +140,7 @@ elseif (isset($_GET['FestivalFounded'])):
                                     echo @$extensioner['name'].' '.@$extensioner['family'];
                                     ?>
                                 </td>
-                                <td><?php echo $festivals['finish_date'] ?></td>
+                                <td><?php echo substr($festivals['finish_date'],0,10) ?></td>
                                 <td>
                                     <?php
 

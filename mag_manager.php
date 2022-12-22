@@ -19,15 +19,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>نام لاتین</th>
+                            <th>رتبه علمی مجله*</th>
                             <td>
-                                <input type="text" class="form-control" id="latin_name" placeholder="نام لاتین نشریه را وارد کنید" name="latin_name">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>نام سابق</th>
-                            <td>
-                                <input type="text" class="form-control" id="last_name" placeholder="نام سابق نشریه را وارد کنید" name="last_name">
+                                <select required class="form-control select2" title="نسخه نشریه را انتخاب کنید">
+                                    <option disabled selected>انتخاب کنید</option>
+                                    <option>علمی پژوهشی</option>
+                                    <option>علمی ترویجی</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
@@ -48,12 +46,12 @@
                             <th>جایگاه بین المللی*</th>
                             <td>
                                 <select required id="international_position" name="international_position" class="form-control select2"  multiple="multiple" title="جایگاه بین المللی را انتخاب کنید (با گرفتن کلید ctrl می توانید چند جایگاه بین المللی انتخاب نمایید)">
-                                    <option>ISC</option>
-                                    <option>CIVILICA</option>
-                                    <option>PUB-MED</option>
-                                    <option>SCOPUS</option>
-                                    <option>SID</option>
-                                    <option>WOS</option>
+                                    <?php
+                                    $query=mysqli_query($connection_variables,'select * from international_position order by subject asc');
+                                    foreach ($query as $international_position_items):
+                                    ?>
+                                        <option value="<?php echo $international_position_items['subject'] ?>"><?php echo $international_position_items['subject'];?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </td>
                         </tr>
@@ -72,13 +70,19 @@
                             <td>
                                 <select required class="form-control" id="publication_period" name="publication_period" title="دوره انتشار نشریه را انتخاب کنید">
                                     <option selected disabled>انتخاب کنید</option>
-                                    <option>هفته نامه</option>
-                                    <option>دو هفته نامه</option>
-                                    <option>ماهنامه</option>
-                                    <option>فصلنامه</option>
-                                    <option>دو فصلنامه</option>
-                                    <option>سالنامه</option>
+                                    <?php
+                                    $query=mysqli_query($connection_variables,'select * from publication_period order by subject asc');
+                                    foreach ($query as $publication_period_items):
+                                    ?>
+                                        <option value="<?php echo $publication_period_items['subject'] ?>"><?php echo $publication_period_items['subject'];?></option>
+                                    <?php endforeach; ?>
                                 </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>شاپا*</th>
+                            <td>
+                                <input required type="text" class="form-control" id="ISSN" placeholder="شاپا را وارد کنید" name="ISSN">
                             </td>
                         </tr>
                         <tr>
@@ -112,9 +116,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>ایمیل</th>
+                            <th>ایمیل*</th>
                             <td>
-                                <input type="email" class="form-control" id="mag_email" placeholder="ایمیل را وارد کنید" name="mag_email">
+                                <input required type="email" class="form-control" id="mag_email" placeholder="ایمیل را وارد کنید" name="mag_email">
                             </td>
                         </tr>
                         <tr>
@@ -124,18 +128,30 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>نوع کاربری صاحب امتیاز*</th>
+                            <td>
+                                <select required class="form-control select2" title="نوع کاربری صاحب امتیاز را انتخاب کنید"
+                                        style="width: 100%;text-align: right" name="concessionaire_type" id="concessionaire_type">
+                                    <option disabled selected>انتخاب کنید</option>
+                                    <option value="حقیقی">حقیقی</option>
+                                    <option value="حقوقی">حقوقی</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
                             <th>صاحب امتیاز*</th>
                             <td>
-                                <input required type="text" class="form-control" id="concessionaire" placeholder="نام و نام خانوادگی صاحب امتیاز را وارد کنید" name="concessionaire">
+                                <input required type="text" class="form-control" id="concessionaire" placeholder="اطلاعات صاحب امتیاز را وارد کنید" name="concessionaire">
                             </td>
                         </tr>
                     </table>
                     <label>اطلاعات مدیر مسئول</label>
                     <table style="width: 80%" class="table table-bordered">
+
                         <tr>
-                            <th>عنوان</th>
+                            <th>عنوان*</th>
                             <td>
-                                <select class="form-control select2" title="عنوان مدیر مسئول را انتخاب کنید"
+                                <select required class="form-control select2" title="عنوان مدیر مسئول را انتخاب کنید"
                                         style="width: 100%;text-align: right" name="responsible_manager_owner_subject" id="responsible_manager_owner_subject">
                                     <option disabled selected>انتخاب کنید</option>
                                     <?php
@@ -151,36 +167,32 @@
                             <th>نام و نام خانوادگی*</th>
                             <td>
                                 <input required type="text" style="width: 49%; display: inherit" class="form-control" id="responsible_manager_owner_name" placeholder="نام" name="responsible_manager_owner_name">
-                                <input required type="text" style="width: 50%; display: inherit" class="form-control" id="responsible_manager_owner_family" placeholder="نام خانوادگی" name="responsible_manager_owner_family">
+                                <input required required type="text" style="width: 50%; display: inherit" class="form-control" id="responsible_manager_owner_family" placeholder="نام خانوادگی" name="responsible_manager_owner_family">
                             </td>
                         </tr>
                         <tr>
-                            <th>مدرک</th>
+                            <th>مدرک*</th>
                             <td>
-                                <select class="form-control" title="مدرک مدیر مسئول را انتخاب کنید" id="responsible_manager_owner_degree" name="responsible_manager_owner_degree">
-                                    <option selected disabled>انتخاب کنید</option>
-                                    <option>دیپلم</option>
-                                    <option>فوق دیپلم/کاردانی</option>
-                                    <option>لیسانس/کارشناسی</option>
-                                    <option>کارشناسی ارشد</option>
-                                    <option>دکتری</option>
-                                    <option>سطح 1 حوزه</option>
-                                    <option>سطح 2 حوزه</option>
-                                    <option>سطح 3 حوزه</option>
-                                    <option>سطح 4 حوزه</option>
+                                <select required class="form-control" title="مدرک مدیر مسئول را انتخاب کنید" id="responsible_manager_owner_degree" name="responsible_manager_owner_degree">
+                                    <?php
+                                    $query=mysqli_query($connection_variables,'select * from degree order by subject asc');
+                                    foreach ($query as $degree_items):
+                                        ?>
+                                        <option value="<?php echo $degree_items['subject'] ?>"><?php echo $degree_items['subject'];?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <th>تلفن ثابت</th>
+                            <th>تلفن ثابت*</th>
                             <td>
-                                <input type="text" class="form-control" id="responsible_manager_owner_phone" placeholder="تلفن ثابت مدیر مسئول را وارد کنید" name="responsible_manager_owner_phone">
+                                <input required type="text" class="form-control" id="responsible_manager_owner_phone" placeholder="تلفن ثابت مدیر مسئول را وارد کنید" name="responsible_manager_owner_phone">
                             </td>
                         </tr>
                         <tr>
-                            <th>تلفن همراه</th>
+                            <th>تلفن همراه*</th>
                             <td>
-                                <input type="text" class="form-control" id="responsible_manager_owner_mobile" placeholder="تلفن همراه مدیر مسئول را وارد کنید" name="responsible_manager_owner_mobile">
+                                <input required type="text" class="form-control" id="responsible_manager_owner_mobile" placeholder="تلفن همراه مدیر مسئول را وارد کنید" name="responsible_manager_owner_mobile">
                             </td>
                         </tr>
                         <tr>
@@ -193,9 +205,9 @@
                     <label>اطلاعات سردبیر</label>
                     <table style="width: 80%" class="table table-bordered">
                         <tr>
-                            <th>عنوان</th>
+                            <th>عنوان*</th>
                             <td>
-                                <select class="form-control select2" title="عنوان سردبیر را انتخاب کنید"
+                                <select required class="form-control select2" title="عنوان سردبیر را انتخاب کنید"
                                         style="width: 100%;text-align: right" name="chief_editor_subject" id="chief_editor_subject">
                                     <option disabled selected>انتخاب کنید</option>
                                     <?php
@@ -215,32 +227,29 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>مدرک</th>
+                            <th>مدرک*</th>
                             <td>
-                                <select class="form-control" title="مدرک سردبیر را انتخاب کنید" id="chief_editor_degree" name="chief_editor_degree">
+                                <select required class="form-control" title="مدرک سردبیر را انتخاب کنید" id="chief_editor_degree" name="chief_editor_degree">
                                     <option selected disabled>انتخاب کنید</option>
-                                    <option>دیپلم</option>
-                                    <option>فوق دیپلم/کاردانی</option>
-                                    <option>لیسانس/کارشناسی</option>
-                                    <option>کارشناسی ارشد</option>
-                                    <option>دکتری</option>
-                                    <option>سطح 1 حوزه</option>
-                                    <option>سطح 2 حوزه</option>
-                                    <option>سطح 3 حوزه</option>
-                                    <option>سطح 4 حوزه</option>
+                                    <?php
+                                    $query=mysqli_query($connection_variables,'select * from degree order by subject asc');
+                                    foreach ($query as $degree_items):
+                                        ?>
+                                        <option value="<?php echo $degree_items['subject'] ?>"><?php echo $degree_items['subject'];?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <th>تلفن ثابت</th>
+                            <th>تلفن ثابت*</th>
                             <td>
-                                <input type="text" class="form-control" id="chief_editor_phone" placeholder="تلفن ثابت ر را وارد کنید" name="chief_editor_phone">
+                                <input required type="text" class="form-control" id="chief_editor_phone" placeholder="تلفن ثابت را وارد کنید" name="chief_editor_phone">
                             </td>
                         </tr>
                         <tr>
-                            <th>تلفن همراه</th>
+                            <th>تلفن همراه*</th>
                             <td>
-                                <input type="text" class="form-control" id="chief_editor_mobile" placeholder="تلفن همراه سردبیر را وارد کنید" name="chief_editor_mobile">
+                                <input required type="text" class="form-control" id="chief_editor_mobile" placeholder="تلفن همراه سردبیر را وارد کنید" name="chief_editor_mobile">
                             </td>
                         </tr>
                         <tr>
@@ -253,9 +262,9 @@
                     <label>اطلاعات مدیر اجرایی</label>
                     <table style="width: 80%" class="table table-bordered">
                         <tr>
-                            <th>عنوان</th>
+                            <th>عنوان*</th>
                             <td>
-                                <select class="form-control select2" title="عنوان مدیر اجرایی را انتخاب کنید"
+                                <select required class="form-control select2" title="عنوان مدیر اجرایی را انتخاب کنید"
                                         style="width: 100%;text-align: right" name="administration_manager_subject" id="administration_manager_subject">
                                     <option disabled selected>انتخاب کنید</option>
                                     <?php
@@ -275,32 +284,30 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>مدرک</th>
+                            <th>مدرک*</th>
                             <td>
-                                <select class="form-control" title="مدرک مدیر اجرایی را انتخاب کنید" id="administration_manager_degree" name="administration_manager_degree">
+
+                                <select required class="form-control" title="مدرک مدیر اجرایی را انتخاب کنید" id="administration_manager_degree" name="administration_manager_degree">
                                     <option selected disabled>انتخاب کنید</option>
-                                    <option>دیپلم</option>
-                                    <option>فوق دیپلم/کاردانی</option>
-                                    <option>لیسانس/کارشناسی</option>
-                                    <option>کارشناسی ارشد</option>
-                                    <option>دکتری</option>
-                                    <option>سطح 1 حوزه</option>
-                                    <option>سطح 2 حوزه</option>
-                                    <option>سطح 3 حوزه</option>
-                                    <option>سطح 4 حوزه</option>
+                                    <?php
+                                    $query=mysqli_query($connection_variables,'select * from degree order by subject asc');
+                                    foreach ($query as $degree_items):
+                                        ?>
+                                        <option value="<?php echo $degree_items['subject'] ?>"><?php echo $degree_items['subject'];?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <th>تلفن ثابت</th>
+                            <th>تلفن ثابت*</th>
                             <td>
-                                <input type="text" class="form-control" id="administration_manager_phone" placeholder="تلفن ثابت مدیر اجرایی را وارد کنید" name="administration_manager_phone">
+                                <input required type="text" class="form-control" id="administration_manager_phone" placeholder="تلفن ثابت مدیر اجرایی را وارد کنید" name="administration_manager_phone">
                             </td>
                         </tr>
                         <tr>
-                            <th>تلفن همراه</th>
+                            <th>تلفن همراه*</th>
                             <td>
-                                <input type="text" class="form-control" id="administration_manager_mobile" placeholder="تلفن همراه مدیر اجرایی را وارد کنید" name="administration_manager_mobile">
+                                <input required type="text" class="form-control" id="administration_manager_mobile" placeholder="تلفن همراه مدیر اجرایی را وارد کنید" name="administration_manager_mobile">
                             </td>
                         </tr>
                         <tr>

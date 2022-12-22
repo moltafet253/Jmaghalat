@@ -6,6 +6,7 @@ if (isset($_POST['New_Festival']) and !empty($_POST['festival_name'])){
     $festival_name=$_POST['festival_name'];
     $password=$_POST['password'];
     $registrar=$_SESSION['id'];
+    $start_date=$_POST['start_date'];
 
     $QueryForCheckFestivalExists=mysqli_query($connection_maghalat,"select * from festival where name='$festival_name'");
     foreach ($QueryForCheckFestivalExists as $Festivalitem){}
@@ -21,7 +22,8 @@ if (isset($_POST['New_Festival']) and !empty($_POST['festival_name'])){
         header("Location: ../../../festival_manager.php?WrongPassword");
     }
     else{
-        mysqli_query($connection_maghalat,"insert into festival (name, start_date, starter) values ('$festival_name','$datewithtime','$registrar')");
+        mysqli_query($connection_maghalat, "update festival set active=0 where active=1");
+        mysqli_query($connection_maghalat,"insert into festival (name, start_date, starter) values ('$festival_name','$start_date','$registrar')");
         header("Location: ../../../festival_manager.php?NewFestival&name=$festival_name");
     }
 }
