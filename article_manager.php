@@ -134,7 +134,7 @@
                     @$mag_version=$_POST['mag_version'];
                     $query=mysqli_query($connection_mag, "select * from mag_versions where id='$mag_version'");
                     foreach ($query as $version_items){}
-                    $number_of_articles=4;
+                    $number_of_articles=$version_items['number_of_articles'];
                     for ($i=1;$i<=$number_of_articles;$i++):
                 ?>
         <center>

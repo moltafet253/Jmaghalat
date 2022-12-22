@@ -13,6 +13,11 @@
                 <center>
                     <table style="width: 80%" class="table table-bordered">
                         <tr>
+                            <th colspan="2" style="text-align: center;background-color: #dee2e6">
+                                اطلاعات نشریه
+                            </th>
+                        </tr>
+                        <tr>
                             <th>نام نشریه*</th>
                             <td>
                                 <input required type="text" class="form-control" id="name" placeholder="نام نشریه را وارد کنید" name="name">
@@ -145,178 +150,224 @@
                             </td>
                         </tr>
                     </table>
-                    <label>اطلاعات مدیر مسئول</label>
-                    <table style="width: 80%" class="table table-bordered">
+                        <br>
+                        <div class="row">
+                        <div class="col-12">
+                            <!-- Custom Tabs -->
+                            <div class="card">
+                                <div class="card-header" style="background-color: #dee2e6;text-align: center; color: #212529; font-weight: bold ">
+                                        اطلاعات مدیران نشریه
+                                </div><!-- /.card-header -->
+                            </div>
+                            <!-- ./card -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <!-- Custom Tabs -->
+                                    <div class="card">
+                                        <div class="card-header d-flex p-1" style="background-color: transparent; border-bottom: 3px solid #dee2e6">
+                                            <!--                                    <h3 class="card-title p-3">تب‌ها</h3>-->
+                                            <ul class="nav nav-pills ml-auto p-2">
+                                                <li class="nav-item"><a style="background-color: #007bff; color: white" class="nav-link active" href="#tab_1" id="tab1" onclick="ChangeTabs('tab1')" data-toggle="tab">مدیر مسئول</a></li>
+                                                <li class="nav-item"><a style="color: #6c757d;" class="nav-link" href="#tab_2" data-toggle="tab" id="tab2" onclick="ChangeTabs('tab2')">سردبیر</a></li>
+                                                <li class="nav-item"><a style="color: #6c757d;" class="nav-link" href="#tab_3" data-toggle="tab" id="tab3" onclick="ChangeTabs('tab3')">مدیر اجرایی</a></li>
+                                            </ul>
+                                        </div><!-- /.card-header -->
 
-                        <tr>
-                            <th>عنوان*</th>
-                            <td>
-                                <select required class="form-control select2" title="عنوان مدیر مسئول را انتخاب کنید"
-                                        style="width: 100%;text-align: right" name="responsible_manager_owner_subject" id="responsible_manager_owner_subject">
-                                    <option disabled selected>انتخاب کنید</option>
-                                    <?php
-                                    $query=mysqli_query($connection_variables,'select * from person_subjects order by subject asc');
-                                    foreach ($query as $person_subjects_items):
-                                        ?>
-                                        <option value="<?php echo $person_subjects_items['subject'] ?>"><?php echo $person_subjects_items['subject'];?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>نام و نام خانوادگی*</th>
-                            <td>
-                                <input required type="text" style="width: 49%; display: inherit" class="form-control" id="responsible_manager_owner_name" placeholder="نام" name="responsible_manager_owner_name">
-                                <input required required type="text" style="width: 50%; display: inherit" class="form-control" id="responsible_manager_owner_family" placeholder="نام خانوادگی" name="responsible_manager_owner_family">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>مدرک*</th>
-                            <td>
-                                <select required class="form-control" title="مدرک مدیر مسئول را انتخاب کنید" id="responsible_manager_owner_degree" name="responsible_manager_owner_degree">
-                                    <?php
-                                    $query=mysqli_query($connection_variables,'select * from degree order by subject asc');
-                                    foreach ($query as $degree_items):
-                                        ?>
-                                        <option value="<?php echo $degree_items['subject'] ?>"><?php echo $degree_items['subject'];?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>تلفن ثابت*</th>
-                            <td>
-                                <input required type="text" class="form-control" id="responsible_manager_owner_phone" placeholder="تلفن ثابت مدیر مسئول را وارد کنید" name="responsible_manager_owner_phone">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>تلفن همراه*</th>
-                            <td>
-                                <input required type="text" class="form-control" id="responsible_manager_owner_mobile" placeholder="تلفن همراه مدیر مسئول را وارد کنید" name="responsible_manager_owner_mobile">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>آدرس</th>
-                            <td>
-                                <textarea class="form-control" rows="3" placeholder="آدرس مدیر مسئول را وارد نمایید" id="responsible_manager_owner_address" name="responsible_manager_owner_address"></textarea>
-                            </td>
-                        </tr>
-                    </table>
-                    <label>اطلاعات سردبیر</label>
-                    <table style="width: 80%" class="table table-bordered">
-                        <tr>
-                            <th>عنوان*</th>
-                            <td>
-                                <select required class="form-control select2" title="عنوان سردبیر را انتخاب کنید"
-                                        style="width: 100%;text-align: right" name="chief_editor_subject" id="chief_editor_subject">
-                                    <option disabled selected>انتخاب کنید</option>
-                                    <?php
-                                    $query=mysqli_query($connection_variables,'select * from person_subjects order by subject asc');
-                                    foreach ($query as $person_subjects_items):
-                                        ?>
-                                        <option value="<?php echo $person_subjects_items['subject'] ?>"><?php echo $person_subjects_items['subject'];?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>نام و نام خانوادگی*</th>
-                            <td>
-                                <input required type="text" style="width: 49%; display: inherit" class="form-control" id="chief_editor_name" placeholder="نام" name="chief_editor_name">
-                                <input required type="text" style="width: 50%; display: inherit" class="form-control" id="chief_editor_family" placeholder="نام خانوادگی" name="chief_editor_family">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>مدرک*</th>
-                            <td>
-                                <select required class="form-control" title="مدرک سردبیر را انتخاب کنید" id="chief_editor_degree" name="chief_editor_degree">
-                                    <option selected disabled>انتخاب کنید</option>
-                                    <?php
-                                    $query=mysqli_query($connection_variables,'select * from degree order by subject asc');
-                                    foreach ($query as $degree_items):
-                                        ?>
-                                        <option value="<?php echo $degree_items['subject'] ?>"><?php echo $degree_items['subject'];?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>تلفن ثابت*</th>
-                            <td>
-                                <input required type="text" class="form-control" id="chief_editor_phone" placeholder="تلفن ثابت را وارد کنید" name="chief_editor_phone">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>تلفن همراه*</th>
-                            <td>
-                                <input required type="text" class="form-control" id="chief_editor_mobile" placeholder="تلفن همراه سردبیر را وارد کنید" name="chief_editor_mobile">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>آدرس</th>
-                            <td>
-                                <textarea class="form-control" rows="3" placeholder="آدرس سردبیر را وارد نمایید" id="chief_editor_address" name="chief_editor_address"></textarea>
-                            </td>
-                        </tr>
-                    </table>
-                    <label>اطلاعات مدیر اجرایی</label>
-                    <table style="width: 80%" class="table table-bordered">
-                        <tr>
-                            <th>عنوان*</th>
-                            <td>
-                                <select required class="form-control select2" title="عنوان مدیر اجرایی را انتخاب کنید"
-                                        style="width: 100%;text-align: right" name="administration_manager_subject" id="administration_manager_subject">
-                                    <option disabled selected>انتخاب کنید</option>
-                                    <?php
-                                    $query=mysqli_query($connection_variables,'select * from person_subjects order by subject asc');
-                                    foreach ($query as $person_subjects_items):
-                                        ?>
-                                        <option value="<?php echo $person_subjects_items['subject'] ?>"><?php echo $person_subjects_items['subject'];?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>نام و نام خانوادگی*</th>
-                            <td>
-                                <input required type="text" style="width: 49%; display: inherit" class="form-control" id="administration_manager_name" placeholder="نام" name="administration_manager_name">
-                                <input required type="text" style="width: 50%; display: inherit" class="form-control" id="administration_manager_family" placeholder="نام خانوادگی" name="administration_manager_family">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>مدرک*</th>
-                            <td>
+                                        <div class="card-body">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="tab_1">
+                                                    <table style="width: 80%" class="table table-bordered">
 
-                                <select required class="form-control" title="مدرک مدیر اجرایی را انتخاب کنید" id="administration_manager_degree" name="administration_manager_degree">
-                                    <option selected disabled>انتخاب کنید</option>
-                                    <?php
-                                    $query=mysqli_query($connection_variables,'select * from degree order by subject asc');
-                                    foreach ($query as $degree_items):
-                                        ?>
-                                        <option value="<?php echo $degree_items['subject'] ?>"><?php echo $degree_items['subject'];?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>تلفن ثابت*</th>
-                            <td>
-                                <input required type="text" class="form-control" id="administration_manager_phone" placeholder="تلفن ثابت مدیر اجرایی را وارد کنید" name="administration_manager_phone">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>تلفن همراه*</th>
-                            <td>
-                                <input required type="text" class="form-control" id="administration_manager_mobile" placeholder="تلفن همراه مدیر اجرایی را وارد کنید" name="administration_manager_mobile">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>آدرس</th>
-                            <td>
-                                <textarea class="form-control" rows="3" placeholder="آدرس مدیر اجرایی را وارد نمایید" id="administration_manager_address" name="administration_manager_address"></textarea>
-                            </td>
-                        </tr>
-                    </table>
+                                                        <tr>
+                                                            <th>عنوان*</th>
+                                                            <td>
+                                                                <select required class="form-control select2" title="عنوان مدیر مسئول را انتخاب کنید"
+                                                                        style="width: 100%;text-align: right" name="responsible_manager_owner_subject" id="responsible_manager_owner_subject">
+                                                                    <option disabled selected>انتخاب کنید</option>
+                                                                    <?php
+                                                                    $query=mysqli_query($connection_variables,'select * from person_subjects order by subject asc');
+                                                                    foreach ($query as $person_subjects_items):
+                                                                        ?>
+                                                                        <option value="<?php echo $person_subjects_items['subject'] ?>"><?php echo $person_subjects_items['subject'];?></option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>نام و نام خانوادگی*</th>
+                                                            <td>
+                                                                <input required type="text" style="width: 49%; display: inherit" class="form-control" id="responsible_manager_owner_name" placeholder="نام" name="responsible_manager_owner_name">
+                                                                <input required required type="text" style="width: 50%; display: inherit" class="form-control" id="responsible_manager_owner_family" placeholder="نام خانوادگی" name="responsible_manager_owner_family">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>مدرک*</th>
+                                                            <td>
+                                                                <select required class="form-control" title="مدرک مدیر مسئول را انتخاب کنید" id="responsible_manager_owner_degree" name="responsible_manager_owner_degree">
+                                                                    <option selected disabled>انتخاب کنید</option>
+                                                                    <?php
+                                                                    $query=mysqli_query($connection_variables,'select * from degree order by subject asc');
+                                                                    foreach ($query as $degree_items):
+                                                                        ?>
+                                                                        <option value="<?php echo $degree_items['subject'] ?>"><?php echo $degree_items['subject'];?></option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>تلفن ثابت*</th>
+                                                            <td>
+                                                                <input required type="text" class="form-control" id="responsible_manager_owner_phone" placeholder="تلفن ثابت مدیر مسئول را وارد کنید" name="responsible_manager_owner_phone">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>تلفن همراه*</th>
+                                                            <td>
+                                                                <input required type="text" class="form-control" id="responsible_manager_owner_mobile" placeholder="تلفن همراه مدیر مسئول را وارد کنید" name="responsible_manager_owner_mobile">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>آدرس</th>
+                                                            <td>
+                                                                <textarea class="form-control" rows="3" placeholder="آدرس مدیر مسئول را وارد نمایید" id="responsible_manager_owner_address" name="responsible_manager_owner_address"></textarea>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <!-- /.tab-pane -->
+                                                <div class="tab-pane" id="tab_2">
+                                                    <table style="width: 80%" class="table table-bordered">
+                                                        <tr>
+                                                            <th>عنوان*</th>
+                                                            <td>
+                                                                <select required class="form-control select2" title="عنوان سردبیر را انتخاب کنید"
+                                                                        style="width: 100%;text-align: right" name="chief_editor_subject" id="chief_editor_subject">
+                                                                    <option disabled selected>انتخاب کنید</option>
+                                                                    <?php
+                                                                    $query=mysqli_query($connection_variables,'select * from person_subjects order by subject asc');
+                                                                    foreach ($query as $person_subjects_items):
+                                                                        ?>
+                                                                        <option value="<?php echo $person_subjects_items['subject'] ?>"><?php echo $person_subjects_items['subject'];?></option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>نام و نام خانوادگی*</th>
+                                                            <td>
+                                                                <input required type="text" style="width: 49%; display: inherit" class="form-control" id="chief_editor_name" placeholder="نام" name="chief_editor_name">
+                                                                <input required type="text" style="width: 50%; display: inherit" class="form-control" id="chief_editor_family" placeholder="نام خانوادگی" name="chief_editor_family">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>مدرک*</th>
+                                                            <td>
+                                                                <select required class="form-control" title="مدرک سردبیر را انتخاب کنید" id="chief_editor_degree" name="chief_editor_degree">
+                                                                    <option selected disabled>انتخاب کنید</option>
+                                                                    <?php
+                                                                    $query=mysqli_query($connection_variables,'select * from degree order by subject asc');
+                                                                    foreach ($query as $degree_items):
+                                                                        ?>
+                                                                        <option value="<?php echo $degree_items['subject'] ?>"><?php echo $degree_items['subject'];?></option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>تلفن ثابت*</th>
+                                                            <td>
+                                                                <input required type="text" class="form-control" id="chief_editor_phone" placeholder="تلفن ثابت سردبیر را وارد کنید" name="chief_editor_phone">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>تلفن همراه*</th>
+                                                            <td>
+                                                                <input required type="text" class="form-control" id="chief_editor_mobile" placeholder="تلفن همراه سردبیر را وارد کنید" name="chief_editor_mobile">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>آدرس</th>
+                                                            <td>
+                                                                <textarea class="form-control" rows="3" placeholder="آدرس سردبیر را وارد نمایید" id="chief_editor_address" name="chief_editor_address"></textarea>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <!-- /.tab-pane -->
+                                                <div class="tab-pane" id="tab_3">
+                                                    <table style="width: 80%" class="table table-bordered">
+                                                        <tr>
+                                                            <th>عنوان*</th>
+                                                            <td>
+                                                                <select required class="form-control select2" title="عنوان مدیر اجرایی را انتخاب کنید"
+                                                                        style="width: 100%;text-align: right" name="administration_manager_subject" id="administration_manager_subject">
+                                                                    <option disabled selected>انتخاب کنید</option>
+                                                                    <?php
+                                                                    $query=mysqli_query($connection_variables,'select * from person_subjects order by subject asc');
+                                                                    foreach ($query as $person_subjects_items):
+                                                                        ?>
+                                                                        <option value="<?php echo $person_subjects_items['subject'] ?>"><?php echo $person_subjects_items['subject'];?></option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>نام و نام خانوادگی*</th>
+                                                            <td>
+                                                                <input required type="text" style="width: 49%; display: inherit" class="form-control" id="administration_manager_name" placeholder="نام" name="administration_manager_name">
+                                                                <input required type="text" style="width: 50%; display: inherit" class="form-control" id="administration_manager_family" placeholder="نام خانوادگی" name="administration_manager_family">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>مدرک*</th>
+                                                            <td>
+
+                                                                <select required class="form-control" title="مدرک مدیر اجرایی را انتخاب کنید" id="administration_manager_degree" name="administration_manager_degree">
+                                                                    <option selected disabled>انتخاب کنید</option>
+                                                                    <?php
+                                                                    $query=mysqli_query($connection_variables,'select * from degree order by subject asc');
+                                                                    foreach ($query as $degree_items):
+                                                                        ?>
+                                                                        <option value="<?php echo $degree_items['subject'] ?>"><?php echo $degree_items['subject'];?></option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>تلفن ثابت*</th>
+                                                            <td>
+                                                                <input required type="text" class="form-control" id="administration_manager_phone" placeholder="تلفن ثابت مدیر اجرایی را وارد کنید" name="administration_manager_phone">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>تلفن همراه*</th>
+                                                            <td>
+                                                                <input required type="text" class="form-control" id="administration_manager_mobile" placeholder="تلفن همراه مدیر اجرایی را وارد کنید" name="administration_manager_mobile">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>آدرس</th>
+                                                            <td>
+                                                                <textarea class="form-control" rows="3" placeholder="آدرس مدیر اجرایی را وارد نمایید" id="administration_manager_address" name="administration_manager_address"></textarea>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <!-- /.tab-pane -->
+                                            </div>
+                                            <!-- /.tab-content -->
+                                        </div><!-- /.card-body -->
+                                    </div>
+                                    <!-- ./card -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+
+                        </div>
+
+                        <!-- /.col -->
+                    </div>
+
                 </center>
 
             </div>
@@ -396,5 +447,5 @@
 <!-- /.content-wrapper -->
 
 <script src="build/js/SearchInMagManagerTable.js"></script>
-
+<script src="build/js/ChangeTabsInMagManager.js"></script>
 <?php include_once __DIR__.'/footer.php'; ?>
