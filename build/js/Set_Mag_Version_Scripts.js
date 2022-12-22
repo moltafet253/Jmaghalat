@@ -25,7 +25,7 @@ function sub_mag_version() {
         mag_name.style.backgroundColor='yellow';
         return false;
     }
-    else if (publication_period_year.value<1380 || publication_period_year.value>=<?php echo $year ?>){
+    else if (publication_period_year.value<1380 || publication_period_year.value>=1410){
         alert ("شماره دوره انتشار نامعتبر است. ");
         publication_period_year.style.backgroundColor='yellow';
         return false;
@@ -45,7 +45,7 @@ else if (publication_period_year.value==''){
         publication_number.style.backgroundColor='yellow';
         return false;
     }
-    else if (publication_year.value<1380 || publication_year.value>=<?php echo $year ?>){
+    else if (publication_year.value<1380 || publication_year.value>=1410){
         alert (" تاریخ انتشار نامعتبر است ");
         publication_year.style.backgroundColor='yellow';
         return false;
