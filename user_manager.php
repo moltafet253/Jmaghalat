@@ -16,7 +16,7 @@ elseif (isset($_GET['UserAdded'])):
     <div class="card card-success">
         <div class="card-header">
             <center>
-                <h3 class="card-title">کاربر جدید '<?php echo $_GET['saeed'] ?>' با موفقیت اضافه شد</h3>
+                <h3 class="card-title">کاربر جدید '<?php echo $_GET['user'] ?>' با موفقیت اضافه شد</h3>
             </center>
         </div>
         <!-- /.card-header -->

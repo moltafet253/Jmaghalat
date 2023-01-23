@@ -29,13 +29,13 @@ if (isset($_POST['Sub_Articles'])) {
         $ext_pdf = pathinfo($file_url_name, PATHINFO_EXTENSION);
 
         if ($file_url_size > 10485760) {
-//            header("location: ../../../article_manager.php?ArticleWrongFileSize>10485760");
+            header("location: ../../../article_manager.php?ArticleWrongFileSize>10485760");
         } elseif ($file_url_size == 0) {
-//            header("location: ../../../article_manager.php?ArticleWrongFileSize0");
+            header("location: ../../../article_manager.php?ArticleWrongFileSize0");
         } elseif (!in_array($ext_pdf, $allowed_pdf)) {
-//            header("location: ../../../article_manager.php?ArticleWrongExtension");
+            header("location: ../../../article_manager.php?ArticleWrongExtension");
         }elseif (empty($file_url) or $file_url_name == '') {
-//            header("location: ../../../article_manager.php?EmptyArticleFile");
+            header("location: ../../../article_manager.php?EmptyArticleFile");
         }
     }
     if (file_exists(__DIR__ . "/../../../Files/Mag_Files/" . $mag_folder_name)) {
@@ -92,13 +92,13 @@ if (isset($_POST['Sub_Articles'])) {
                     $LastID = $Last_Article['max(id)'];
                     mysqli_query($connection_mag, "update mag_articles set cooperators='$str' where id='$LastID'");
                     mysqli_query($connection_mag, "update mag_versions set article_submitted=1 where id='$mag_version_id'");
-//                    header("location: ../../../article_manager.php?ArticleSubmitted");
+                    header("location: ../../../article_manager.php?ArticleSubmitted");
 
                 }
             }
         }
     else {
-//            header("location: ../../../article_manager.php?ArticleFinded");
+            header("location: ../../../article_manager.php?ArticleFinded");
         }
     }
 

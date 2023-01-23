@@ -1,7 +1,7 @@
 <?php
 include_once 'jdf.php';
 include_once 'GDate.php';
-include_once 'PHPExcel/Classes/PHPExcel.php';
+//include_once 'PHPExcel/Classes/PHPExcel.php';
 //ini_set('session.gc_maxlifetime', 36000);
 date_default_timezone_set("Asia/Tehran");
 $main_url="https://localhost/Jmaghalat/";

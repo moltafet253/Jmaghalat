@@ -211,7 +211,7 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
         </form>
     </div>
 
-    <div class="card card-primary">
+    <div class="card card-primary" id="article">
         <div class="card-header">
             <h3 class="card-title">ثبت مقالات</h3>
         </div>
@@ -351,8 +351,8 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
                                 <div class="custom-file">
                                     <input title="فایل جلد نشریه" accept="application/pdf" type="file"
                                            class="custom-file-input" id="article_file_url_<?php echo $i; ?>"
-                                           name="article_file_url_<?php echo $i; ?>">
-                                    <label id="article_file_url_<?php echo $i; ?>" class="custom-file-label">انتخاب
+                                           name="article_file_url_<?php echo $i; ?>" onchange="showname(<?php echo $i; ?>)">
+                                    <label id="article_file_url_Name_<?php echo $i; ?>" class="custom-file-label">انتخاب
                                         فایل</label>
                                 </div>
                             </td>
@@ -448,24 +448,8 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
 
 <!-- /.content-wrapper -->
 <!--not completed-->
-<script>
-    function countWords(article_body, ShowID) {
-        var count = 0;
-        var split = article_body.split(' ');
-        for (var i = 0; i < split.length; i++) {
-            if (split[i] != "") {
-                count++;
-            }
-        }
-        document.getElementById("show_" + ShowID).innerHTML = count + '/250';
-        if (count >= 251) {
-            alert("چکیده بیشتر از 250 کلمه می باشد");
-        }
-    }
-</script>
-<script>
-    function
-</script>
+<script src="build/js/CountWords_In_article_manager.js"></script>
+<script src="build/js/ShowNameOfFiles_In_article_manager.js"></script>
 <script>
     function ValidateForm() {
         <?php for ($i = 1;$i <= $number_of_articles;$i++): ?>
@@ -603,16 +587,7 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
 
     }
 </script>
-<script>
-    function displayrow(SelectionValue, trID) {
-        var valuegroup = 'گروهی';
-        if (SelectionValue == valuegroup) {
-            document.getElementById("display_row_" + trID).style = '';
-        } else {
-            document.getElementById("display_row_" + trID).style.display = 'none';
-        }
-    }
-</script>
+<script src="build/js/DisplayRow_In_article_manager.js"></script>
 <script src="build/js/Set_Mag_Version_Scripts.js"></script>
 <script src="build/js/SearchInMagManagerTable.js"></script>
 

@@ -1,5 +1,49 @@
 <?php include_once __DIR__ . '/header.php'; ?>
-
+<?php
+if (isset($_GET['MagAdded'])):
+    ?>
+    <div class="card card-success">
+        <div class="card-header">
+            <center>
+                <h3 class="card-title">نشریه با نام
+                    <?php
+                    echo $_GET['MagAdded']
+                    ?>
+                    با موفقیت در سامانه ثبت شد.
+                </h3>
+            </center>
+        </div>
+        <!-- /.card-header -->
+    </div>
+<?php
+elseif (isset($_GET['NameExists'])):
+    ?>
+    <div class="card card-danger">
+        <div class="card-header">
+            <center>
+                <h3 class="card-title">
+                    نشریه وارد شده با نام
+                    <?php echo $_GET['name'] ?>
+                    قبلا در سیستم ثبت شده است
+                </h3>
+            </center>
+        </div>
+        <!-- /.card-header -->
+    </div>
+<?php
+elseif (isset($_GET['WrongOperation'])):
+    ?>
+    <div class="card card-danger">
+        <div class="card-header">
+            <center>
+                <h3 class="card-title">
+                    عملیات نامعتبر
+                </h3>
+            </center>
+        </div>
+        <!-- /.card-header -->
+    </div>
+<?php endif; ?>
 <!-- Main content -->
 <section class="content">
     <div class="card card-primary">
@@ -480,53 +524,100 @@
                     <h3 class="card-title">نمایش و مدیریت نشریات (به ترتیب نام نشریه)</h3>
                     <br>
                     <div class="card-tools-user-manager">
-                        <!--                        <div class="input-group input-group-sm" style="width: 150px;">-->
+                        <!--                                                <div class="input-group input-group-sm">-->
                         <input type="search" name="table_search" class="form-control float-right"
                                placeholder="لطفا برای جستجو، نام نشریه مورد نظر را تایپ نمایید" onkeyup="myFunction()"
                                id="myInput">
-                        <!--                        </div>-->
+                        <!--                                                </div>-->
                     </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
-                    <!--                    <table class="table table-bordered table-striped" id="myTable">-->
-                    <!--                        <tr>-->
-                    <!--                            <th>ردیف</th>-->
-                    <!--                            <th>کاربر</th>-->
-                    <!--                            <th>مشخصات</th>-->
-                    <!--                            <th>گروه علمی</th>-->
-                    <!--                            <th>شماره همراه</th>-->
-                    <!--                            <th>بانک</th>-->
-                    <!--                            <th>حساب</th>-->
-                    <!--                            <th>شماره کارت</th>-->
-                    <!--                            <th>شماره شبا</th>-->
-                    <!--                            <th>عملیات</th>-->
-                    <!--                        </tr>-->
-                    <!--                        --><?php
-                    //                        $a=1;
-                    //                        $SelectAllUsers=mysqli_query($connection_maghalat,"select * from users order by family asc");
-                    //                        foreach ($SelectAllUsers as $users):
-                    //                            ?>
-                    <!--                            <tr>-->
-                    <!--                                <td>--><?php //echo $a;$a++; ?><!--</td>-->
-                    <!--                                <td>--><?php //echo $users['username']; ?><!--</td>-->
-                    <!--                                <td>-->
-                    <?php //echo $users['name']. ' ' .$users['family']?><!--</td>-->
-                    <!--                                <td >--><?php
-                    //                                    $groups=explode('||',$users['scientific_group']);
-                    //                                    foreach ($groups as $itemgroups){
-                    //                                        echo '<label style="width: 180px">'.'*'.$itemgroups.'</label>'.'<br>';
-                    //                                    }
-                    //                                    ?><!--</td>-->
-                    <!--                                <td>--><?php //echo $users['phone'] ?><!--</td>-->
-                    <!--                                <td>--><?php //echo $users['bank_name'] ?><!--</td>-->
-                    <!--                                <td>--><?php //echo $users['bank_id'] ?><!--</td>-->
-                    <!--                                <td>--><?php //echo $users['debit_card_id'] ?><!--</td>-->
-                    <!--                                <td>--><?php //echo $users['shaba'] ?><!--</td>-->
-                    <!--                                <td></td>-->
-                    <!--                            </tr>-->
-                    <!--                        --><?php //endforeach; ?>
-                    <!--                    </table>-->
+                    <table class="table table-bordered table-striped" id="myTable">
+                        <tr>
+                            <th>ردیف</th>
+                            <th>نام</th>
+                            <th>رتبه علمی</th>
+                            <th>گروه علمی</th>
+                            <th>جایگاه بین المللی</th>
+                            <th>نوع نشریه</th>
+                            <th>شاپا</th>
+                            <th>دوره انتشار</th>
+                            <th>صاحب امتیاز</th>
+                            <th>مدیر مسئول</th>
+                            <th>سردبیر</th>
+                            <th>مدیر اجرایی</th>
+                        </tr>
+                        <?php
+                        $a = 1;
+                        $SelectAllMagInfos = mysqli_query($connection_mag, "select * from mag_info order by name asc");
+                        foreach ($SelectAllMagInfos as $mag_info):
+                            $admin_id = $mag_info['admin_id'];
+                            $query = mysqli_query($connection_mag, "select * from mag_admins where id='$admin_id'");
+                            foreach ($query as $mag_admin) {
+                            }
+                            ?>
+                            <tr>
+                                <td><?php echo $a;
+                                    $a++; ?></td>
+                                <td>
+                                    <?php
+                                    echo $mag_info['name'];
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo $mag_info['science_rank'];
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo $mag_info['scientific_group'];
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo $mag_info['international_position'];
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo $mag_info['mag_type'];
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo $mag_info['ISSN'];
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo $mag_info['publication_period'];
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo $mag_admin['concessionaire'];
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo $mag_admin['responsible_manager_owner_subject'] . ' ' . $mag_admin['responsible_manager_owner_name'] . ' ' . $mag_admin['responsible_manager_owner_family'];
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo $mag_admin['chief_editor_subject'] . ' ' . $mag_admin['chief_editor_name'] . ' ' . $mag_admin['chief_editor_family'];
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo $mag_admin['administration_manager_subject'] . ' ' . $mag_admin['administration_manager_name'] . ' ' . $mag_admin['administration_manager_family'];
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
                 </div>
                 <!-- /.card-body -->
             </div>
