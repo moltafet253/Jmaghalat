@@ -8,7 +8,19 @@
                 <p>صفحه اصلی</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="mag_manager.php" class="nav-link">
+                <i class="fa fa-book  nav-icon"></i>
+                <p>مدیریت مجلات</p>
+            </a>
+        </li>
 
+        <li class="nav-item">
+            <a href="article_manager.php" class="nav-link">
+                <i class="fa fa-pencil-square  nav-icon"></i>
+                <p>مدیریت مقالات</p>
+            </a>
+        </li>
         <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
                 <i class="nav-icon fa fa-mail-forward"></i>
@@ -87,19 +99,7 @@
             </ul>
         </li>
 
-        <li class="nav-item">
-            <a href="mag_manager.php" class="nav-link">
-                <i class="fa fa-book  nav-icon"></i>
-                <p>مدیریت مجلات</p>
-            </a>
-        </li>
 
-        <li class="nav-item">
-            <a href="article_manager.php" class="nav-link">
-                <i class="fa fa-pencil-square  nav-icon"></i>
-                <p>مدیریت مقالات</p>
-            </a>
-        </li>
 
         <li class="nav-item">
             <a href="user_manager.php" class="nav-link">

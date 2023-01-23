@@ -25,11 +25,6 @@ function sub_mag_version() {
         mag_name.style.backgroundColor='yellow';
         return false;
     }
-    else if (publication_period_year.value<1380 || publication_period_year.value>=1410){
-        alert ("شماره دوره انتشار نامعتبر است. ");
-        publication_period_year.style.backgroundColor='yellow';
-        return false;
-    }
 else if (publication_period_year.value==''){
         alert ("شماره دوره انتشار را انتخاب کنید. ");
         publication_period_year.style.backgroundColor='yellow';

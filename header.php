@@ -51,12 +51,12 @@ if (!isset($_SESSION['islogin'])){
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-    <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+<!--    <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">-->
         <!-- Left navbar links -->
-        <ul class="navbar-nav" style="text-align: center">
-            به سامانه ارزیابی جشنواره مقالات علمی حوزه خوش آمدید
-        </ul>
-    </nav>
+<!--        <ul class="navbar-nav" style="text-align: center">-->
+<!--            به سامانه ارزیابی جشنواره مقالات علمی حوزه خوش آمدید-->
+<!--        </ul>-->
+<!--    </nav>-->
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
