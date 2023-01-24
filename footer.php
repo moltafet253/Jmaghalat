@@ -1,6 +1,6 @@
 <!-- Control Sidebar -->
 <!--<aside class="control-sidebar control-sidebar-dark">-->
-<!--    <!-- Control sidebar content goes here -->-->
+<!--    Control sidebar content goes here -->
 <!--</aside>-->
 <!-- /.control-sidebar -->
 <!-- Main Footer -->
@@ -29,7 +29,7 @@
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
+<!--<script src="plugins/jquery/jquery.min.js"></script>-->
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
@@ -48,7 +48,7 @@
 <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- ChartJS 1.0.2 -->
 <script src="plugins/chartjs-old/Chart.min.js"></script>
-<script src="plugins/select2/select2.full.min.js"></script>
+<!--<script src="plugins/select2/select2.full.min.js"></script>-->
 <!-- PAGE SCRIPTS -->
 <script src="dist/js/pages/dashboard2.js"></script>
 </body>

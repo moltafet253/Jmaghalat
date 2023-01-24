@@ -1,4 +1,4 @@
-<?php include_once __DIR__.'/header.php'; ?>
+<?php include_once __DIR__ . '/header.php'; ?>
 <?php
 if (isset($_GET['NewFestival'])):
     ?>
@@ -34,7 +34,7 @@ elseif (isset($_GET['FestivalFounded'])):
     </div>
 <?php endif; ?>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         $(".example1").pDatepicker();
     });
 </script>
@@ -54,31 +54,37 @@ elseif (isset($_GET['FestivalFounded'])):
                             <th>شماره دوره</th>
                             <td>
                                 <input type="number" style="width: 350px" class="form-control" id="festival_id" disabled
-                                       value="<?php $last=last_festival_id($connection_maghalat);echo $last+1; ?>">
+                                       value="<?php $last = last_festival_id($connection_maghalat);
+                                       echo $last + 1; ?>">
                             </td>
                         </tr>
                         <tr>
                             <th>نام فارسی دوره*</th>
                             <td>
-                                <input type="text" style="width: 350px" class="form-control" id="festival_name" placeholder="نام فارسی دوره (شماره دوره به حروف) مثلا سیزدهم" name="festival_name">
+                                <input type="text" style="width: 350px" class="form-control" id="festival_name"
+                                       placeholder="نام فارسی دوره (شماره دوره به حروف) مثلا سیزدهم"
+                                       name="festival_name">
                             </td>
                         </tr>
                         <tr>
                             <th>تاریخ شروع فراخوان*</th>
                             <td>
-                                    <div class="input-group" style="width: 350px">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                        </div>
-                                        <input type="text" name="start_date" class="form-control ltr" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask="" placeholder="حتما به این صورت وارد شود: <?php echo $date ?>">
+                                <div class="input-group" style="width: 350px">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                     </div>
-                                    <!-- /.input group -->
+                                    <input type="text" name="start_date" class="form-control ltr"
+                                           data-inputmask="'alias': 'yyyy/mm/dd'" data-mask=""
+                                           placeholder="حتما به این صورت وارد شود: <?php echo $date ?>">
+                                </div>
+                                <!-- /.input group -->
                             </td>
                         </tr>
                         <tr>
                             <th>رمز عبور خود را وارد کنید*</th>
                             <td>
-                                <input type="password" style="width: 350px" class="form-control" id="password" placeholder="رمز عبور خود را وارد کنید" name="password">
+                                <input type="password" style="width: 350px" class="form-control" id="password"
+                                       placeholder="رمز عبور خود را وارد کنید" name="password">
                             </td>
                         </tr>
                     </table>
@@ -100,7 +106,7 @@ elseif (isset($_GET['FestivalFounded'])):
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">نمایش و مدیریت جشنواره های برگزار شده (به ترتیب دوره از آخرین به اولین)</h3>
-                    </div>
+                </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
                     <table class="table table-bordered table-striped" id="myTable">
@@ -115,32 +121,40 @@ elseif (isset($_GET['FestivalFounded'])):
                             <th>کاربر پایان دهنده</th>
                         </tr>
                         <?php
-                        $a=1;
-                        $SelectAllUsers=mysqli_query($connection_maghalat,"select * from festival order by id asc");
+                        $a = 1;
+                        $SelectAllUsers = mysqli_query($connection_maghalat, "select * from festival order by id asc");
                         foreach ($SelectAllUsers as $festivals):
                             ?>
                             <tr>
-                                <td><?php echo $a;$a++; ?></td>
+                                <td><?php echo $a;
+                                    $a++; ?></td>
                                 <td><?php echo $festivals['name']; ?></td>
-                                <td><?php echo substr($festivals['start_date'],0,10) ?></td>
+                                <td><?php echo substr($festivals['start_date'], 0, 10) ?></td>
                                 <td>
                                     <?php
-                                    $starter=$festivals['starter'];
-                                    $query=mysqli_query($connection_maghalat,"select * from users where id='$starter'");
-                                    foreach ($query as $starter){}
-                                    echo @$starter['name'].' '.@$starter['family'];
+                                    $starter = $festivals['starter'];
+                                    $query = mysqli_query($connection_maghalat, "select * from users where id='$starter'");
+                                    foreach ($query as $starter) {
+                                    }
+                                    echo @$starter['name'] . ' ' . @$starter['family'];
                                     ?>
                                 </td>
-                                <td><?php echo substr($festivals['extension_date'],0,10) ?></td>
+                                <td><?php echo substr($festivals['extension_date'], 0, 10) ?></td>
                                 <td>
                                     <?php
-                                    $extensioner=$festivals['extensioner'];
-                                    $query=mysqli_query($connection_maghalat,"select name,family from users where id='$extensioner'");
-                                    foreach ($query as $extensioner){}
-                                    echo @$extensioner['name'].' '.@$extensioner['family'];
+                                    $extensioner = $festivals['extensioner'];
+                                    if ($extensioner != '-') {
+                                        $query = mysqli_query($connection_maghalat, "select name,family from users where id='$extensioner'");
+                                        foreach ($query as $extensioner) {
+                                        }
+                                        echo $extensioner['name'] . ' ' . $extensioner['family'];
+                                    } else {
+                                        echo $extensioner;
+                                    }
+
                                     ?>
                                 </td>
-                                <td><?php echo substr($festivals['finish_date'],0,10) ?></td>
+                                <td><?php echo substr($festivals['finish_date'], 0, 10) ?></td>
                                 <td>
                                     <?php
 
@@ -170,4 +184,4 @@ elseif (isset($_GET['FestivalFounded'])):
 
 <script src="build/js/SearchInUserManagerTable.js"></script>
 
-<?php include_once __DIR__.'/footer.php'; ?>
+<?php include_once __DIR__ . '/footer.php'; ?>

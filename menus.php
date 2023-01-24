@@ -116,6 +116,13 @@
         </li>
 
         <li class="nav-item">
+            <a href="catalogs.php" class="nav-link">
+                <i class="fa fa-cogs  nav-icon"></i>
+                <p>مدیریت کاتالوگ ها</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a href="logout.php" class="nav-link">
                 <i class="fa fa-sign-in nav-icon"></i>
                 <p>خروج</p>

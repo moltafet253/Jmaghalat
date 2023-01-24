@@ -314,7 +314,22 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
                                 </select>
                             </td>
                         </tr>
-
+                        <tr>
+                            <th>بخش ویژه</th>
+                            <td>
+                                <select class="form-control select2" title='اگر این اثر بخش ویژه است، لطفا عنوان بخش ویژه را انتخاب نمایید'
+                                        name="_<?php echo $i; ?>"
+                                        id="special_type_<?php echo $i; ?>">
+                                    <option disabled selected>انتخاب کنید</option>
+                                    <?php
+                                    $query = mysqli_query($connection_maghalat, 'select * from special_type order by subject asc');
+                                    foreach ($query as $special_type):
+                                        ?>
+                                        <option value="<?php echo $special_type['id'] ?>"><?php echo $special_type['subject']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </td>
+                        </tr>
                         <tr>
                             <th>شماره صفحه در نشریه (از)*</th>
                             <td>

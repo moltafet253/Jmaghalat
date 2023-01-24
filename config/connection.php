@@ -12,7 +12,7 @@ $hour=jdate('H');
 $min=jdate('i');
 $sec=jdate('s');
 $date=$year."/".$month."/".$day;
-$datewithtime=$year."/".$month."/".$day.' '.$hour.":".$min;
+$datewithtime=$year."/".$month."/".$day.' '.$hour.":".$min.":".$sec;
 
 $connection_maghalat = @mysqli_connect('localhost', 'root', '', 'jashnvareh_maghalat');
 if (mysqli_connect_errno()) {

@@ -41,6 +41,13 @@ if (!isset($_SESSION['islogin'])){
     <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
     <!-- Persian Data Picker -->
     <link rel="stylesheet" href="/dist/css/persian-datepicker.min.css">
+<!--    Select2 CSS-->
+    <link rel="stylesheet" type="text/css" href="/bower_components/select2/dist/css/select2.min.css">
+    <!-- jQuery -->
+    <script src="bower_components/jquery-3.3.1.min.js" type="text/javascript"></script>
+
+    <!-- Select2 JS -->
+    <script src="bower_components/select2/dist/js/select2.min.js" type="text/javascript"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
