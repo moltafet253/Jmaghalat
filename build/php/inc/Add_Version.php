@@ -25,20 +25,20 @@ if (isset($_POST['Sub_Mag_Version']) and isset($_POST['mag_name'])) {
     $file_url_type = $_FILES['file_url']['type'];
     $file_url_tmpname = $_FILES["file_url"]["tmp_name"];
 
-    $allowed_pdf = array('pdf');
+    $allowed_pdf = array('pdf', 'doc', 'docx');
     $ext_pdf = pathinfo($file_url_name, PATHINFO_EXTENSION);
 
-    $allowed_jpg = array('jpg', 'jpeg');
+    $allowed_jpg = array('jpg', 'jpeg', 'pdf');
     $ext_jpg = pathinfo($cover_url_name, PATHINFO_EXTENSION);
 
     $adhesive = $_SESSION['id'];
 
     if ($cover_url_size > 10485760 or $file_url_size > 10485760) {
-        header("location: ../../../article_manager.php?WrongFileSize>10485760");
+        header("location: ../../../version_manager.php?WrongFileSize>10485760");
     } elseif ($cover_url_size == 0 or $file_url_size == 0) {
-        header("location: ../../../article_manager.php?WrongFileSize0");
+        header("location: ../../../version_manager.php?WrongFileSize0");
     } elseif (!in_array($ext_pdf, $allowed_pdf) or !in_array($ext_jpg, $allowed_jpg)) {
-        header("location: ../../../article_manager.php?WrongExtension");
+        header("location: ../../../version_manager.php?WrongExtension");
     } else {
         if ((!empty($_FILES['cover_url']) or $cover_url_name != '') and (!empty($_FILES['file_url']) or $file_url_name != '')) {
             $folder_name = $mag_id . '-' . $publication_period_year . '-' . $publication_period_number . '-' . $publication_number . '-' . $publication_year . '-' . $adhesive;
@@ -46,7 +46,7 @@ if (isset($_POST['Sub_Mag_Version']) and isset($_POST['mag_name'])) {
                 $query = mysqli_query($connection_mag, "select * from mag_info where id='$mag_id'");
                 foreach ($query as $Mag_Info) {
                 }
-                $version_name=$Mag_Info['name'];
+                $version_name = $Mag_Info['name'];
                 $admin_id = $Mag_Info['admin_id'];
                 $file_address = "Files/Mag_Files/$folder_name/" . $file_url_name;
                 $cover_address = "Files/Mag_Files/$folder_name/" . $cover_url_name;
@@ -58,12 +58,12 @@ if (isset($_POST['Sub_Mag_Version']) and isset($_POST['mag_name'])) {
                 mkdir(__DIR__ . "/../../../Files/Mag_Files/" . $folder_name);
                 move_uploaded_file($cover_url_tmpname, __DIR__ . "/../../../Files/Mag_Files/$folder_name/" . $cover_url_name);
                 move_uploaded_file($file_url_tmpname, __DIR__ . "/../../../Files/Mag_Files/$folder_name/" . $file_url_name);
-                header("location: ../../../article_manager.php?VersionAdded&version_name=$version_name");
+                header("location: ../../../version_manager.php?VersionAdded&version_name=$version_name");
             } else {
-                header("location: ../../../article_manager.php?finded");
+                header("location: ../../../version_manager.php?finded");
             }
         } else {
-            header("location: ../../../article_manager.php?EmptyFile");
+            header("location: ../../../version_manager.php?EmptyFile");
         }
     }
 }

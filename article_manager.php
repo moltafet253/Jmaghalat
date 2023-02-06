@@ -49,167 +49,9 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
             </div>
         </div>
     </section>
-<?php elseif (isset($_GET['WrongFileSize>10485760'])): ?>
-    <section class="content">
-        <div class="card card-danger">
-            <div class="card-header">
-                <h3 class="card-title" style="text-align: center">حجم فایل نسخه نشریه بالاتر از 10 مگابایت می باشد</h3>
-            </div>
-        </div>
-    </section>
-<?php elseif (isset($_GET['WrongFileSize0'])): ?>
-    <section class="content">
-        <div class="card card-danger">
-            <div class="card-header">
-                <h3 class="card-title" style="text-align: center">حجم فایل نسخه نشریه نامعتبر می باشد</h3>
-            </div>
-        </div>
-    </section>
-<?php elseif (isset($_GET['WrongExtension'])): ?>
-    <section class="content">
-        <div class="card card-danger">
-            <div class="card-header">
-                <h3 class="card-title" style="text-align: center">پسوند فایل نسخه نشریه معتبر نیست.</h3>
-            </div>
-        </div>
-    </section>
-<?php elseif (isset($_GET['VersionAdded'])): ?>
-    <section class="content">
-        <div class="card card-success">
-            <div class="card-header">
-                <h3 class="card-title" style="text-align: center">
-                    نسخه نشریه
-                     <?php echo $_GET['version_name'] ?>
-                    با موفقیت اضافه شد.
-                </h3>
-            </div>
-        </div>
-    </section>
-<?php elseif (isset($_GET['finded'])): ?>
-    <section class="content">
-        <div class="card card-danger">
-            <div class="card-header">
-                <h3 class="card-title" style="text-align: center">نسخه نشریه تکراری می باشد</h3>
-            </div>
-        </div>
-    </section>
-<?php elseif (isset($_GET['EmptyFile'])): ?>
-    <section class="content">
-        <div class="card card-danger">
-            <div class="card-header">
-                <h3 class="card-title" style="text-align: center">فایل نسخه نشریه انتخاب نشده است</h3>
-            </div>
-        </div>
-    </section>
 <?php endif; ?>
 <!-- Main content -->
 <section class="content">
-    <div class="card card-primary">
-        <div class="card-header">
-            <h3 class="card-title">ثبت نسخه نشریه</h3>
-        </div>
-        <!-- /.card-header -->
-        <!-- form start -->
-
-        <form role="form" method="post" action="build/php/inc/Add_Version.php" onsubmit="return sub_mag_version();"
-              enctype="multipart/form-data">
-            <div class="card-body">
-                <center>
-                    <table style="width: 80%" class="table table-bordered">
-                        <tr>
-                            <th>نام نشریه*</th>
-                            <td>
-                                <select class="form-control select2" title="نام نشریه را انتخاب کنید"
-                                        style="width: 100%;text-align: right" name="mag_name" id="mag_name">
-                                    <option selected disabled>انتخاب کنید</option>
-
-                                    <?php
-                                    $query = mysqli_query($connection_mag, 'select * from mag_info order by name asc');
-                                    foreach ($query as $mag_items):
-                                        ?>
-                                        <option value="<?php echo $mag_items['id'] ?>"><?php echo $mag_items['name']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>شماره دوره انتشار (سال)*</th>
-                            <td>
-                                <input title="شماره دوره انتشار (سال)" type="number" class="form-control"
-                                       id="publication_period_year"
-                                       placeholder="شماره دوره انتشار (سال) را وارد کنید. (به عنوان مثال: سال 24)"
-                                       name="publication_period_year">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>شماره دوره نشریه در سال*</th>
-                            <td>
-                                <input title="شماره دوره نشریه در سال" type="number" class="form-control"
-                                       id="publication_period_number" placeholder="مثلا شماره 2"
-                                       name="publication_period_number">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>شماره نسخه نشریه*</th>
-                            <td>
-                                <input title="شماره نسخه نشریه" type="text" class="form-control" id="publication_number"
-                                       placeholder="شماره نسخه نشریه را وارد کنید" name="publication_number">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>سال انتشار*</th>
-                            <td>
-                                <input title="سال انتشار" type="number" class="form-control" id="publication_year"
-                                       placeholder="سال انتشار نشریه را وارد کنید" name="publication_year">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>شمارگان صفحه*</th>
-                            <td>
-                                <input title="شمارگان صفحه" type="number" class="form-control" id="number_of_pages"
-                                       placeholder="شمارگان صفحه نشریه را وارد کنید" name="number_of_pages">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>تعداد مقالات*</th>
-                            <td>
-                                <input title="تعداد مقالات" type="number" class="form-control" id="number_of_articles"
-                                       placeholder="تعداد مقاله نشریه را وارد کنید" name="number_of_articles">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>فایل جلد نشریه*</th>
-                            <td>
-                                <div class="custom-file">
-                                    <input title="فایل جلد نشریه" accept=".jpg,.jpeg" type="file"
-                                           class="custom-file-input" id="cover_url" name="cover_url">
-                                    <label id="cover_url_label" class="custom-file-label">انتخاب فایل</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>فایل نشریه*</th>
-                            <td>
-                                <div class="custom-file">
-                                    <input title="فایل نشریه" accept="application/pdf,.doc,.docx" type="file"
-                                           class="custom-file-input" id="file_url" name="file_url">
-                                    <label id="file_url_label" class="custom-file-label">انتخاب فایل</label>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </center>
-
-            </div>
-            <!-- /.card-body -->
-            <center>
-                <div class="card-footer">
-                    <button name="Sub_Mag_Version" type="submit" class="btn btn-primary">ثبت نسخه جدید</button>
-                </div>
-            </center>
-
-        </form>
-    </div>
 
     <div class="card card-primary" id="article">
         <div class="card-header">
@@ -217,7 +59,7 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form role="form" method="post" onsubmit="return countWords()">
+        <form action="#article" role="form" method="post" onsubmit="return countWords()">
             <div class="card-body">
                 <center>
                     <table class="table table-bordered">
@@ -248,7 +90,8 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
                 </center>
             </div>
         </form>
-        <?php if (isset($_POST['Select_Mag_Version'])): ?>
+    </div>
+    <?php if (isset($_POST['Select_Mag_Version'])): ?>
         <form role="form" method="post" action="build/php/inc/Add_Article.php" onsubmit="return ValidateForm()"
               enctype="multipart/form-data">
             <?php
@@ -317,12 +160,13 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
                         <tr>
                             <th>بخش ویژه</th>
                             <td>
-                                <select class="form-control select2" title='اگر این اثر بخش ویژه است، لطفا عنوان بخش ویژه را انتخاب نمایید'
-                                        name="_<?php echo $i; ?>"
+                                <select class="form-control select2"
+                                        title='اگر این اثر بخش ویژه است، لطفا عنوان بخش ویژه را انتخاب نمایید'
+                                        name="special_type_<?php echo $i; ?>"
                                         id="special_type_<?php echo $i; ?>">
-                                    <option disabled selected>انتخاب کنید</option>
+                                    <option>انتخاب کنید</option>
                                     <?php
-                                    $query = mysqli_query($connection_maghalat, 'select * from special_type order by subject asc');
+                                    $query = mysqli_query($connection_maghalat, 'select * from special_type where active=1 order by subject asc');
                                     foreach ($query as $special_type):
                                         ?>
                                         <option value="<?php echo $special_type['id'] ?>"><?php echo $special_type['subject']; ?></option>
@@ -366,9 +210,10 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
                                 <div class="custom-file">
                                     <input title="فایل جلد نشریه" accept="application/pdf" type="file"
                                            class="custom-file-input" id="article_file_url_<?php echo $i; ?>"
-                                           name="article_file_url_<?php echo $i; ?>" onchange="showname(<?php echo $i; ?>)">
+                                           name="article_file_url_<?php echo $i; ?>"
+                                           onchange="showname(<?php echo $i; ?>)">
                                     <label id="article_file_url_Name_<?php echo $i; ?>" class="custom-file-label">انتخاب
-                                        فایل</label>
+                                        فایل (دقت داشته باشید که نام فایل های مقاله نباید با هم برابر باشند)</label>
                                 </div>
                             </td>
                         </tr>
@@ -429,37 +274,230 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
                         <tr>
                             <th>انتخاب اثر برای شرکت در جشنواره</th>
                             <td>
-                                <input name="select_for_jm_<?php echo $i; ?>" type="checkbox" class="radio"
-                                       id="select_for_jm_<?php echo $i; ?>">
-                                <label for="select_for_jm_<?php echo $i; ?>">شرکت در جشنواره مقالات</label>
+                                <select class="form-control select2" title="دوره مورد نظر را انتخاب کنید"
+                                        id="select_for_jm_<?php echo $i; ?>"
+                                        name="select_for_jm_<?php echo $i; ?>">
+                                    <option disabled selected>انتخاب کنید</option>
+                                    <?php
+                                    $query=mysqli_query($connection_maghalat,"select * from festival order by id asc");
+                                    foreach ($query as $festivals):
+                                    ?>
+                                    <option value="<?php echo $festivals['id'] ?>"><?php echo $festivals['name'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </td>
                         </tr>
                     </table>
                 </center>
             <?php endfor; ?>
-
-    </div>
-    <!-- /.card-body -->
-    <center>
-        <div class="card-footer">
-            <input type="hidden" value="<?php echo $mag_version ?>" name="mag_version">
-            <input type="hidden" value="<?php echo $number_of_articles ?>" name="number_of_articles">
-            <button name="Sub_Articles"
-                    onclick="return confirm('آیا از صحت اطلاعات وارد شده مطمئن هستید؟ مقالات وارد شده پس از ثبت، به نشریه انتخاب شده اختصاص می یابند. این عملیات قابل بازگشت نیست!');"
-                    type="submit" class="btn btn-primary">ثبت مقالات در نشریه
-            </button>
-        </div>
-    </center>
-    </form>
+            <!-- /.card-body -->
+            <center>
+                <div class="card-footer">
+                    <input type="hidden" value="<?php echo $mag_version ?>" name="mag_version">
+                    <input type="hidden" value="<?php echo $number_of_articles ?>" name="number_of_articles">
+                    <button name="Sub_Articles"
+                            onclick="return confirm('آیا از صحت اطلاعات وارد شده مطمئن هستید؟ مقالات وارد شده پس از ثبت، به نشریه انتخاب شده اختصاص می یابند. این عملیات قابل بازگشت نیست!');"
+                            type="submit" class="btn btn-primary">ثبت مقالات در نشریه
+                    </button>
+                </div>
+            </center>
+        </form>
     <?php else: ?>
-        <p style="background-color: #dc3545;color: white;padding: 8px;font-size: 20px;text-align: center"><?php echo 'نشریه ای انتخاب نشده است '; ?></p>
+        <p style="background-color: #dc3545;color: white;padding: 8px;font-size: 20px;text-align: center"><?php echo 'نشریه ای برای ثبت انتخاب نشده است '; ?></p>
     <?php endif; ?>
-    </div>
-    <!-- /.card -->
 
+    <!-- /.card -->
 </section>
-<!-- /.content -->
+<section class="content">
+    <script>
+        function versionshow(str) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("version_id").innerHTML = this.responseText;
+                }
+            }
+            xmlhttp.open("GET", "build/ajax/showversions.php?magid=" + str, true);
+            xmlhttp.send();
+        }
+    </script>
+    <div class="row" id="article_list">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <form action="#article_list" method="post" id="search_form">
+                        <h3 class="card-title">نمایش و مدیریت مقالات در نشریه:
+
+                            <select id="mag_id" name="mag_id" class="form-control select2"
+                                    onchange="versionshow(this.value)"
+                                    style="width: auto;display: inline-block">
+                                <option disabled selected>انتخاب کنید</option>
+                                <?php
+                                $query = mysqli_query($connection_mag, "select * from mag_info");
+                                foreach ($query as $mag_info):
+                                    ?>
+                                    <option <?php if (@$_POST['mag_id'] == $mag_info['id']) echo 'selected' ?>
+                                            value="<?php echo $mag_info['id'] ?>"><?php echo $mag_info['name'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <select id="version_id" name="version_id" class="form-control select2"
+                                    style="width: auto;display: inline-block">
+                                <?php if (isset($_POST['Search_Articles'])) {
+                                    $mag_id = $_POST['mag_id'];
+                                    $query = mysqli_query($connection_mag, "select * from mag_versions where mag_info_id='$mag_id' order by id desc");
+                                    foreach ($query as $version_info) {
+                                        if ($version_info['id'] == $mag_id) {
+                                            echo "<option selected value=" . $version_info['id'] . ">" . 'شماره' . $version_info['publication_number'] . ' - سال' . $version_info['publication_year'] . "</option>";
+                                        } else {
+                                            echo "<option value=" . $version_info['id'] . ">" . 'شماره' . $version_info['publication_number'] . ' - سال' . $version_info['publication_year'] . "</option>";
+                                        }
+                                    }
+                                } ?>
+                            </select>
+                            <button name="Search_Articles" type="submit" class="btn btn-primary">نمایش</button>
+
+                        </h3>
+                    </form>
+                </div>
+                <?php if (isset($_POST['Search_Articles'])): ?>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-bordered table-striped" id="myTable">
+                            <tr>
+                                <th>ردیف</th>
+                                <th>عنوان مقاله</th>
+                                <th>نوع مقاله</th>
+                                <th>گروه علمی 1</th>
+                                <th>گروه علمی 2</th>
+                                <th>بخش ویژه</th>
+                                <th>شماره صفحه در نشریه (از)*</th>
+                                <th>شماره صفحه در نشریه (تا)*</th>
+                                <th>زبان</th>
+                                <th>چکیده</th>
+                                <th>نویسنده</th>
+                                <th>نوع همکاری</th>
+                                <th>همکاران</th>
+                                <th>انتخاب اثر برای شرکت در جشنواره</th>
+                                <th>فایل مقاله</th>
+                            </tr>
+                            <?php
+                            $a = 1;
+                            $version_id = $_POST['version_id'];
+                            $SelectAllArticles = mysqli_query($connection_mag, "select * from mag_articles where mag_version_id='$version_id' order by id asc");
+                            foreach ($SelectAllArticles as $Mag_Articles):
+                                ?>
+                                <tr>
+                                    <td><?php echo $a;
+                                        $a++; ?></td>
+                                    <td>
+                                        <?php
+                                        echo $Mag_Articles['subject'];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        echo $Mag_Articles['type'];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        echo $Mag_Articles['scientific_group_1'];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        echo $Mag_Articles['scientific_group_2'];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        $special_type=$Mag_Articles['special_type'];
+                                        $query=mysqli_query($connection_maghalat,"select * from special_type where id='$special_type'");
+                                        foreach ($query as $Special_Type_Detail){}
+                                        echo $Special_Type_Detail['subject'];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        echo $Mag_Articles['number_of_page_in_mag_from'];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        echo $Mag_Articles['number_of_page_in_mag_to'];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        echo $Mag_Articles['language'];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        echo $Mag_Articles['body'];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        $author=explode('|',$Mag_Articles['author']);
+                                        echo $author[0];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        echo $Mag_Articles['cooperation_type'];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                        <?php
+                                        if (isset($Mag_Articles['cooperators'])){
+                                            $cooperators=explode('|',$Mag_Articles['cooperators']);
+                                            for ($c=0;$c<count($cooperators);$c+=2){
+                                                echo '<li style="margin-right: 5px">' . @$cooperators[$c] . '</li>';
+                                            }
+                                        }
+                                        ?>
+                                        </ul>
+                                    </td>
+                                    <td <?php
+                                        if ($Mag_Articles['selected_for_jm']==1){
+                                            echo "style='background-color:green;color:white'";
+                                        }
+                                            ?>>
+                                        <?php
+                                        if ($Mag_Articles['selected_for_jm']==1){
+                                            $festival_id=$Mag_Articles['festival_id'];
+                                            $query=mysqli_query($connection_maghalat,"select * from festival where id='$festival_id'");
+                                            foreach ($query as $festival_detail){}
+                                            echo 'انتخاب شده برای شرکت در دوره '.$festival_detail['name'];
+                                        }
+                                        $Mag_Articles['selected_for_jm']=null;
+                                        $query=null;
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <a target="_blank" href="<?php
+                                        echo 'Files/Mag_Files/'.$Mag_Articles['file_url'];
+                                        ?>">
+                                            دانلود
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                <?php endif; ?>
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</section>
 </div>
+
+
+<!-- /.content -->
 
 <!-- /.content-wrapper -->
 <!--not completed-->
@@ -471,6 +509,7 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
         var subject_<?php echo $i ?> = document.getElementById("subject_<?php echo $i ?>").value;
         var type_<?php echo $i ?> = document.getElementById("type_<?php echo $i ?>").value;
         var scientific_group_1_<?php echo $i ?> = document.getElementById("scientific_group_1_<?php echo $i ?>").value;
+        var scientific_group_2_<?php echo $i ?> = document.getElementById("scientific_group_2_<?php echo $i ?>").value;
         var number_of_page_in_mag_from_<?php echo $i ?> = document.getElementById("number_of_page_in_mag_from_<?php echo $i ?>").value;
         var number_of_page_in_mag_to_<?php echo $i ?> = document.getElementById("number_of_page_in_mag_to_<?php echo $i ?>").value;
         var language_<?php echo $i ?> = document.getElementById("language_<?php echo $i ?>").value;
@@ -485,6 +524,7 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
         document.getElementById("subject_<?php echo $i ?>").style.backgroundColor = 'white';
         document.getElementById("type_<?php echo $i ?>").style.backgroundColor = 'white';
         document.getElementById("scientific_group_1_<?php echo $i ?>").style.backgroundColor = 'white';
+        document.getElementById("scientific_group_2_<?php echo $i ?>").style.backgroundColor = 'white';
         document.getElementById("number_of_page_in_mag_from_<?php echo $i ?>").style.backgroundColor = 'white';
         document.getElementById("number_of_page_in_mag_to_<?php echo $i ?>").style.backgroundColor = 'white';
         document.getElementById("language_<?php echo $i ?>").style.backgroundColor = 'white';
@@ -507,6 +547,11 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
         } else if (scientific_group_1_1 == 'انتخاب کنید') {
             alert('گروه علمی اول انتخاب نشده است');
             document.getElementById("scientific_group_1_1").style.backgroundColor = 'yellow';
+            return false;
+        } else if (scientific_group_2_1 == scientific_group_1_1) {
+            alert('گروه علمی اول با دوم است');
+            document.getElementById("scientific_group_1_1").style.backgroundColor = 'yellow';
+            document.getElementById("scientific_group_2_1").style.backgroundColor = 'yellow';
             return false;
         } else if (number_of_page_in_mag_from_1 == '') {
             alert('شماره صفحه در نشریه (از) وارد نشده است');
@@ -540,13 +585,7 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
             alert('نوع همکاری وارد نشده است');
             document.getElementById("cooperation_type_1").style.backgroundColor = 'yellow';
             return false;
-        } else if (number_of_page_in_mag_from_1 > number_of_page_in_mag_to_1) {
-            alert('آخرین شماره صفحه مقاله از اولین شماره کمتر می باشد');
-            document.getElementById("number_of_page_in_mag_from_1").style.backgroundColor = 'yellow';
-            document.getElementById("number_of_page_in_mag_to_1").style.backgroundColor = 'yellow';
-            return false;
         }
-
         <?php for ($i = 2;$i <= $number_of_articles;$i++): ?>
         else if (subject_<?php echo $i ?>== '') {
             alert('عنوان مقاله خالی است');
@@ -559,6 +598,11 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
         } else if (scientific_group_1_<?php echo $i ?>== 'انتخاب کنید') {
             alert('گروه علمی اول انتخاب نشده است');
             document.getElementById("scientific_group_1_<?php echo $i ?>").style.backgroundColor = 'yellow';
+            return false;
+        } else if (scientific_group_1_<?php echo $i ?>== scientific_group_2_<?php echo $i ?>) {
+            alert('گروه علمی اول با دوم برابر است');
+            document.getElementById("scientific_group_1_<?php echo $i ?>").style.backgroundColor = 'yellow';
+            document.getElementById("scientific_group_2_<?php echo $i ?>").style.backgroundColor = 'yellow';
             return false;
         } else if (number_of_page_in_mag_from_<?php echo $i ?>== '') {
             alert('شماره صفحه در نشریه (از) وارد نشده است');
@@ -592,18 +636,11 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
             alert('نوع همکاری وارد نشده است');
             document.getElementById("cooperation_type_<?php echo $i ?>").style.backgroundColor = 'yellow';
             return false;
-        } else if (number_of_page_in_mag_from_<?php echo $i ?> > number_of_page_in_mag_to_<?php echo $i ?>) {
-            alert('آخرین شماره صفحه مقاله از اولین شماره کمتر می باشد');
-            document.getElementById("number_of_page_in_mag_from_<?php echo $i ?>").style.backgroundColor = 'yellow';
-            document.getElementById("number_of_page_in_mag_to_<?php echo $i ?>").style.backgroundColor = 'yellow';
-            return false;
         }
         <?php endfor; ?>
 
     }
 </script>
 <script src="build/js/DisplayRow_In_article_manager.js"></script>
-<script src="build/js/Set_Mag_Version_Scripts.js"></script>
-<script src="build/js/SearchInMagManagerTable.js"></script>
 
 <?php include_once __DIR__ . '/footer.php'; ?>
