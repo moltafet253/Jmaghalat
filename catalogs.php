@@ -17,7 +17,7 @@
                 </tr>
                 <tr style="text-align: center">
                     <td>1.</td>
-                    <td>عناوین بخش ویژه</td>
+                    <td style=";vertical-align: middle">عناوین بخش ویژه</td>
                     <td>
                         <select multiple class="form-control select2" style="width: 100%;">
                             <?php

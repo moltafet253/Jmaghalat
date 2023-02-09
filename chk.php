@@ -6,10 +6,10 @@ session_start();
 
 $urlofthispage=$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
-//type=1 => ارزیاب
-//type=1 => مدیر
-//type=2 => سرگروه
-//type=3 => بینندگان
+//type=1 => rater
+//type=2 => header
+//type=3 => admin
+//type=4 => super-admin
 //approved=0 => کاربر غیر فعال شده
 $dateforinsertloglogins=$year.'/'.$month.'/'.$day.' '.$hour.':'.$min.':'.$sec;
 

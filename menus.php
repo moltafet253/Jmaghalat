@@ -35,24 +35,6 @@
 
         <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-mail-forward"></i>
-                <p>
-                    عملیات مربوط به ارزیابی
-                    <i class="right fa fa-angle-left"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="new_article.php" class="nav-link">
-                        <i class="fa fa-circle-o nav-icon"></i>
-                        <p>ثبت اثر جدید</p>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
                 <i class="nav-icon fa fa-user-circle"></i>
                 <p>
                     اختصاص اثر به ارزیاب
@@ -61,13 +43,13 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="pages/charts/chartjs.html" class="nav-link">
+                    <a href="set_ejmali.php" class="nav-link">
                         <i class="fa fa-dot-circle-o nav-icon"></i>
                         <p>اجمالی</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/charts/chartjs.html" class="nav-link">
+                    <a href="set_tafsili.php" class="nav-link">
                         <i class="fa fa-circle-o nav-icon"></i>
                         <p>تفصیلی</p>
                     </a>

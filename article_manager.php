@@ -325,7 +325,7 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <form action="#article_list" method="post" id="search_form">
+                    <form action="#article_list" method="post" id="search_form" onsubmit="return Check_Search_Submit()">
                         <h3 class="card-title">نمایش و مدیریت مقالات در نشریه:
 
                             <select id="mag_id" name="mag_id" class="form-control select2"
@@ -501,6 +501,15 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
 
 <!-- /.content-wrapper -->
 <!--not completed-->
+<script>
+    function Check_Search_Submit(){
+        var version_id=document.getElementById('version_id').value;
+        if (version_id==null || version_id==''){
+            alert ("لطفا نسخه مجله را انتخاب کنید.");
+            return false;
+        }
+    }
+</script>
 <script src="build/js/CountWords_In_article_manager.js"></script>
 <script src="build/js/ShowNameOfFiles_In_article_manager.js"></script>
 <script>

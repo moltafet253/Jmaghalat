@@ -24,7 +24,7 @@ if (!isset($_SESSION['islogin'])){
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<!--    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">-->
 
     <!-- bootstrap rtl -->
     <link rel="stylesheet" href="dist/css/bootstrap-rtl.min.css">
@@ -49,7 +49,7 @@ if (!isset($_SESSION['islogin'])){
     <!-- Select2 JS -->
     <script src="bower_components/select2/dist/js/select2.min.js" type="text/javascript"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<!--    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">-->
 
     <!-- bootstrap rtl -->
     <link rel="stylesheet" href="../../dist/css/bootstrap-rtl.min.css">
