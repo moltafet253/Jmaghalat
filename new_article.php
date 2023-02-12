@@ -37,7 +37,7 @@
                             $query=mysqli_query($connection_maghalat, "Select * from scientific_group");
                             foreach ($query as $groups):
                             ?>
-                            <option><?php echo $groups['name'] ?></option>
+                            <option value="<?php echo $groups['id'] ?>"><?php echo $groups['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </td>
@@ -49,7 +49,7 @@
                             $query=mysqli_query($connection_maghalat, "Select * from scientific_group");
                             foreach ($query as $groups):
                                 ?>
-                                <option><?php echo $groups['name'] ?></option>
+                                <option value="<?php echo $groups['id'] ?>"><?php echo $groups['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </td>

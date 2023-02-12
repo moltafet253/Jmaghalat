@@ -159,8 +159,14 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
                         <tr>
                             <th>سال انتشار*</th>
                             <td>
-                                <input title="سال انتشار" type="number" class="form-control" id="publication_year"
-                                       placeholder="سال انتشار نشریه را وارد کنید" name="publication_year">
+                                <div class="input-group" style="width: 100%">
+                                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="fa fa-calendar"></i>
+                      </span>
+                                    </div>
+                                    <input class="normal-example form-control" name="publication_year" id="publication_year" style="">
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -225,7 +231,7 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
                                 foreach ($query as $mag_info):
                                     ?>
                                     <option <?php if (@$_POST['mag_id'] == $mag_info['id']) echo 'selected' ?>
-                                            value="<?php echo $mag_info['id'] ?>"><?php echo $mag_info['publication_period'].' '.$mag_info['name'] ?></option>
+                                            value="<?php echo $mag_info['id'] ?>"><?php echo $mag_info['publication_period'] . ' ' . $mag_info['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <button name="Search_Mag_Version" type="submit" class="btn btn-primary">نمایش</button>
@@ -288,14 +294,14 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
                                         ?>
                                     </td>
                                     <td>
-                                        <a target="_blank" href="<?php
+                                        <a id='no-link' style="color: #0a53be" target="_blank" href="<?php
                                         echo $Mag_Version['cover_url'];
                                         ?>">
                                             دانلود
                                         </a>
                                     </td>
                                     <td>
-                                        <a target="_blank" href="<?php
+                                        <a id='no-link' style="color: #0a53be" target="_blank" href="<?php
                                         echo $Mag_Version['file_url'];
                                         ?>">
                                             دانلود

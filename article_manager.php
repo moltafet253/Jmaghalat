@@ -330,10 +330,10 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
 
                             <select id="mag_id" name="mag_id" class="form-control select2"
                                     onchange="versionshow(this.value)"
-                                    style="width: auto;display: inline-block">
+                                    style="width: 30%;display: inline-block">
                                 <option disabled selected>انتخاب کنید</option>
                                 <?php
-                                $query = mysqli_query($connection_mag, "select * from mag_info");
+                                $query = mysqli_query($connection_mag, "select * from mag_info inner join mag_versions on mag_info.id=mag_versions.mag_info_id");
                                 foreach ($query as $mag_info):
                                     ?>
                                     <option <?php if (@$_POST['mag_id'] == $mag_info['id']) echo 'selected' ?>
@@ -341,7 +341,7 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
                                 <?php endforeach; ?>
                             </select>
                             <select id="version_id" name="version_id" class="form-control select2"
-                                    style="width: auto;display: inline-block">
+                                    style="width: 30%;display: inline-block">
                                 <?php if (isset($_POST['Search_Articles'])) {
                                     $mag_id = $_POST['mag_id'];
                                     $query = mysqli_query($connection_mag, "select * from mag_versions where mag_info_id='$mag_id' order by id desc");
@@ -477,7 +477,7 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
                                         ?>
                                     </td>
                                     <td>
-                                        <a target="_blank" href="<?php
+                                        <a id='no-link' style="color: #0a53be" target="_blank" href="<?php
                                         echo 'Files/Mag_Files/'.$Mag_Articles['file_url'];
                                         ?>">
                                             دانلود
@@ -504,7 +504,7 @@ if (isset($_GET['ArticleWrongFileSize>10485760'])):
 <script>
     function Check_Search_Submit(){
         var version_id=document.getElementById('version_id').value;
-        if (version_id==null || version_id==''){
+        if (version_id==null || version_id=='' || version_id=='انتخاب کنید'){
             alert ("لطفا نسخه مجله را انتخاب کنید.");
             return false;
         }

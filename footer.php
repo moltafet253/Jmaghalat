@@ -7,7 +7,7 @@
 <footer class="main-footer">
     <!-- Default to the left -->
     <center>
-        <strong>
+        <strong style="position: center;">
             امروز:
             <?php
             $date=jdate("l Y/n/j");
@@ -29,7 +29,7 @@
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
-<!--<script src="plugins/jquery/jquery.min.js"></script>-->
+<script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
@@ -37,7 +37,10 @@
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="dist/js/demo.js"></script>
-
+<!-- InputMask -->
+<script src="plugins/input-mask/jquery.inputmask.js"></script>
+<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <!-- PAGE PLUGINS -->
 <!-- SparkLine -->
 <script src="plugins/sparkline/jquery.sparkline.min.js"></script>
@@ -48,12 +51,40 @@
 <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- ChartJS 1.0.2 -->
 <script src="plugins/chartjs-old/Chart.min.js"></script>
-<!--<script src="plugins/select2/select2.full.min.js"></script>-->
+<script src="plugins/select2/select2.full.min.js"></script>
 <!-- PAGE SCRIPTS -->
 <script src="dist/js/pages/dashboard2.js"></script>
+<script src="build/js/NoLink.js"></script>
+<!-- Select2 -->
+<script src="plugins/select2/select2.full.min.js"></script>
+<!-- Persian Data Picker -->
+<script src="dist/js/persian-date.min.js"></script>
+<script src="dist/js/persian-datepicker.min.js"></script>
+<!-- FastClick -->
+<script src="plugins/fastclick/fastclick.js"></script>
 </body>
 </html>
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
 
+        //Datemask dd/mm/yyyy
+        $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+        //Datemask2 mm/dd/yyyy
+        $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+        //Money Euro
+        $('[data-mask]').inputmask()
+
+
+        $('.normal-example').pDatepicker(
+            {
+                viewMode: 'year',
+                format: 'YYYY',
+            }
+        );
+    })
+</script>
 <?php
 include_once __DIR__.'/config/connection_close.php';
 ?>

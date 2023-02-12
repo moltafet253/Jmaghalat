@@ -113,7 +113,7 @@ elseif (isset($_GET['WrongOperation'])):
                         <tr>
                             <th>نوع نشریه*</th>
                             <td>
-                                <select class="form-control" id="type" name="type" title="نوع نشریه را انتخاب کنید">
+                                <select class="form-control select2" id="type" name="type" title="نوع نشریه را انتخاب کنید">
                                     <option selected disabled>انتخاب کنید</option>
                                     <option>دانشگاهی</option>
                                     <option>حوزوی</option>
@@ -123,7 +123,7 @@ elseif (isset($_GET['WrongOperation'])):
                         <tr>
                             <th>دوره انتشار*</th>
                             <td>
-                                <select class="form-control" id="publication_period" name="publication_period"
+                                <select class="form-control select2" id="publication_period" name="publication_period"
                                         title="دوره انتشار نشریه را انتخاب کنید">
                                     <option selected disabled>انتخاب کنید</option>
                                     <?php

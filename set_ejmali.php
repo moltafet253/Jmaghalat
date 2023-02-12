@@ -26,7 +26,7 @@
                 </tr>
                 <?php
                 $a = 1;
-                $query = mysqli_query($connection_mag, "select * from mag_articles where selected_for_jm=1 order by festival_id asc");
+                $query = mysqli_query($connection_mag, "select * from jashnvareh_maghalat.article c inner join mag_base.mag_articles m on c.article_id = m.id where m.selected_for_jm=1 and c.rate_status='اجمالی' order by m.id asc");
                 foreach ($query as $Ejmali_list):
                     ?>
                     <tr>
@@ -35,18 +35,28 @@
                             $a++; ?>
                         </td>
                         <td>
+                            <a href="Files/Mag_Files/<?php echo $Ejmali_list['file_url'] ?>" target="_blank" id='no-link' style="color: #0a53be">
+                                <?php
+                                echo $Ejmali_list['subject'];
+                                ?>
+                            </a>
+                        </td>
+                        <td>
                             <?php
-                            echo $Ejmali_list['subject'];
+                            $Group1=$Ejmali_list['scientific_group_1'];
+                            $query=mysqli_query($connection_maghalat,"select * from scientific_group where id='$Group1'");
+                            foreach ($query as $Group1){}
+                            echo $Group1['name'];
+                            $Group1['name']=null;
                             ?>
                         </td>
                         <td>
                             <?php
-                            echo $Ejmali_list['scientific_group_1'];
-                            ?>
-                        </td>
-                        <td>
-                            <?php
-                            echo $Ejmali_list['scientific_group_2'];
+                            $Group2=$Ejmali_list['scientific_group_2'];
+                            $query=mysqli_query($connection_maghalat,"select * from scientific_group where id='$Group2'");
+                            foreach ($query as $Group2){}
+                            echo $Group2['name'];
+                            $Group2['name']=null;
                             ?>
                         </td>
                         <td>
@@ -74,7 +84,7 @@
                                 <?php
                                 if (isset($Ejmali_list['cooperators'])) {
                                     $cooperators = explode('|', $Ejmali_list['cooperators']);
-                                    for ($c = 0; $c < count($cooperators); $c += 2) {
+                                    for ($c = 0, $cMax = count($cooperators); $c < $cMax; $c += 2) {
                                         echo '<li style="margin-right: 5px">' . @$cooperators[$c] . '</li>';
                                     }
                                 }
@@ -83,7 +93,7 @@
                         </td>
                         <td>
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب اول</p>
-                            <select onchange="SetEjmaliGroup1Rater1(this.value,<?php echo $id = $Ejmali_list['id'] ?>)"
+                            <select onchange="SetEjmaliGroup1Rater1(this.value,<?php echo $id = $Ejmali_list['article_id']; ?>)"
                                     id="rater_group_1_1" name="rater_group_1_1" class="form-control select2"
                                     style="width: auto;display: inline-block;margin-bottom: 8px">
                                 <option disabled selected>انتخاب کنید</option>
@@ -93,7 +103,7 @@
                                     ?>
                                     <option <?php
                                     $rater1 = $raters_info['id'];
-                                    $query = mysqli_query($connection_maghalat, "select * from article where ejmali1_ratercode_g1='$rater1' and article_id='$id'");
+                                    $query = mysqli_query($connection_maghalat, "select * from article where article_id='$id'");
                                     foreach ($query as $rater1_info) {
                                     }
                                     if ($raters_info['id'] == @$rater1_info['ejmali1_ratercode_g1']) {
@@ -105,12 +115,15 @@
 
                                         ?>
                                     </option>
+                                    <script>
+                                        //$('#rater_group_1_1').val('<?php //echo @$Ejmali_list['ejmali1_ratercode_g1']; ?>//');
+                                    </script>
                                 <?php endforeach;
                                 ?>
                             </select>
                             <br/>
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب دوم</p>
-                            <select onchange="SetEjmaliGroup1Rater2(this.value,<?php echo $id = $Ejmali_list['id'] ?>)"
+                            <select onchange="SetEjmaliGroup1Rater2(this.value,<?php echo $id = $Ejmali_list['article_id'] ?>)"
                                     id="rater_group_1_2" name="rater_group_1_2" class="form-control select2"
                                     style="width: auto;display: inline-block;margin-bottom: 8px">
                                 <option disabled selected>انتخاب کنید</option>
@@ -120,7 +133,7 @@
                                     ?>
                                     <option <?php
                                     $rater2 = $raters_info['id'];
-                                    $query = mysqli_query($connection_maghalat, "select * from article where ejmali2_ratercode_g1='$rater2' and article_id='$id'");
+                                    $query = mysqli_query($connection_maghalat, "select * from article where article_id='$id'");
                                     foreach ($query as $rater2_info) {
                                     }
                                     if ($raters_info['id'] == @$rater2_info['ejmali2_ratercode_g1']) {
@@ -131,12 +144,15 @@
                                         <?php echo $raters_info['name'] . ' ' . $raters_info['family'];
                                         ?>
                                     </option>
+                                    <script>
+                                        //$('#rater_group_1_2').val('<?php //echo @$Ejmali_list['ejmali2_ratercode_g1']; ?>//');
+                                    </script>
                                 <?php endforeach;
                                 ?>
                             </select>
                             <br/>
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب سوم</p>
-                            <select onchange="SetEjmaliGroup1Rater3(this.value,<?php echo $id = $Ejmali_list['id'] ?>)"
+                            <select onchange="SetEjmaliGroup1Rater3(this.value,<?php echo $id = $Ejmali_list['article_id'] ?>)"
                                     id="rater_group_1_3" name="rater_group_1_3" class="form-control select2"
                                     style="width: auto;display: inline-block;margin-bottom: 8px">
                                 <option disabled selected>انتخاب کنید</option>
@@ -146,7 +162,7 @@
                                     ?>
                                     <option <?php
                                     $rater3 = $raters_info['id'];
-                                    $query = mysqli_query($connection_maghalat, "select * from article where ejmali3_ratercode_g1='$rater3' and article_id='$id'");
+                                    $query = mysqli_query($connection_maghalat, "select * from article where article_id='$id'");
                                     foreach ($query as $rater3_info) {
                                     }
                                     if ($raters_info['id'] == @$rater3_info['ejmali3_ratercode_g1']) {
@@ -157,6 +173,9 @@
                                         <?php echo $raters_info['name'] . ' ' . $raters_info['family'];
                                         ?>
                                     </option>
+                                    <script>
+                                        //$('#rater_group_1_3').val('<?php //echo @$Ejmali_list['ejmali3_ratercode_g1']; ?>//');
+                                    </script>
                                 <?php endforeach;
                                 ?>
                             </select>
@@ -164,7 +183,7 @@
                         <td>
                             <?php if ($Ejmali_list['scientific_group_2']!=null or $Ejmali_list['scientific_group_2']!=''): ?>
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب اول</p>
-                            <select onchange="SetEjmaliGroup2Rater1(this.value,<?php echo $id = $Ejmali_list['id'] ?>)"
+                            <select onchange="SetEjmaliGroup2Rater1(this.value,<?php echo $id = $Ejmali_list['article_id'] ?>)"
                                     id="rater_group_2_1" name="rater_group_2_1" class="form-control select2"
                                     style="width: auto;display: inline-block;margin-bottom: 8px">
                                 <option disabled selected>انتخاب کنید</option>
@@ -174,7 +193,7 @@
                                     ?>
                                     <option <?php
                                     $rater1 = $raters_info['id'];
-                                    $query = mysqli_query($connection_maghalat, "select * from article where ejmali1_ratercode_g2='$rater1' and article_id='$id'");
+                                    $query = mysqli_query($connection_maghalat, "select * from article where article_id='$id'");
                                     foreach ($query as $rater1_info) {
                                     }
                                     if ($raters_info['id'] == @$rater1_info['ejmali1_ratercode_g2']) {
@@ -186,12 +205,15 @@
 
                                         ?>
                                     </option>
+                                    <script>
+                                        //$('#rater_group_2_1').val('<?php //echo @$Ejmali_list['ejmali1_ratercode_g2']; ?>//');
+                                    </script>
                                 <?php endforeach;
                                 ?>
                             </select>
                             <br/>
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب دوم</p>
-                            <select onchange="SetEjmaliGroup2Rater2(this.value,<?php echo $id = $Ejmali_list['id'] ?>)"
+                            <select onchange="SetEjmaliGroup2Rater2(this.value,<?php echo $id = $Ejmali_list['article_id'] ?>)"
                                     id="rater_group_2_2" name="rater_group_2_2" class="form-control select2"
                                     style="width: auto;display: inline-block;margin-bottom: 8px">
                                 <option disabled selected>انتخاب کنید</option>
@@ -201,7 +223,7 @@
                                     ?>
                                     <option <?php
                                     $rater2 = $raters_info['id'];
-                                    $query = mysqli_query($connection_maghalat, "select * from article where ejmali2_ratercode_g2='$rater2' and article_id='$id'");
+                                    $query = mysqli_query($connection_maghalat, "select * from article where article_id='$id'");
                                     foreach ($query as $rater2_info) {
                                     }
                                     if ($raters_info['id'] == @$rater2_info['ejmali2_ratercode_g2']) {
@@ -212,12 +234,15 @@
                                         <?php echo $raters_info['name'] . ' ' . $raters_info['family'];
                                         ?>
                                     </option>
+                                    <script>
+                                        //$('#rater_group_2_2').val('<?php //echo @$Ejmali_list['ejmali2_ratercode_g2']; ?>//');
+                                    </script>
                                 <?php endforeach;
                                 ?>
                             </select>
                             <br/>
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب سوم</p>
-                            <select onchange="SetEjmaliGroup2Rater3(this.value,<?php echo $id = $Ejmali_list['id'] ?>)"
+                            <select onchange="SetEjmaliGroup2Rater3(this.value,<?php echo $id = $Ejmali_list['article_id'] ?>)"
                                     id="rater_group_2_3" name="rater_group_2_3" class="form-control select2"
                                     style="width: auto;display: inline-block;margin-bottom: 8px">
                                 <option disabled selected>انتخاب کنید</option>
@@ -227,7 +252,7 @@
                                     ?>
                                     <option <?php
                                     $rater3 = $raters_info['id'];
-                                    $query = mysqli_query($connection_maghalat, "select * from article where ejmali3_ratercode_g2='$rater3' and article_id='$id'");
+                                    $query = mysqli_query($connection_maghalat, "select * from article where article_id='$id'");
                                     foreach ($query as $rater3_info) {
                                     }
                                     if ($raters_info['id'] == @$rater3_info['ejmali3_ratercode_g2']) {
@@ -238,6 +263,9 @@
                                         <?php echo $raters_info['name'] . ' ' . $raters_info['family'];
                                         ?>
                                     </option>
+                                    <script>
+                                        //$('#rater_group_2_3').val('<?php //echo @$Ejmali_list['ejmali3_ratercode_g2']; ?>//');
+                                    </script>
                                 <?php endforeach;
                                 ?>
                             </select>
@@ -264,89 +292,6 @@
 
 <!-- /.content-wrapper -->
 
-<script>
-    function SetEjmaliGroup1Rater1(coderater, codeasar) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-
-            }
-        }
-        xmlhttp.open("GET", "build/ajax/Set_ejmali/Rater1_Group1.php?coderater=" + coderater + "&codeasar=" + codeasar, true);
-        xmlhttp.send();
-        codeasar = null;
-        coderater = null;
-    }
-</script>
-<script>
-    function SetEjmaliGroup1Rater2(coderater, codeasar) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-
-            }
-        }
-        xmlhttp.open("GET", "build/ajax/Set_ejmali/Rater2_Group1.php?coderater=" + coderater + "&codeasar=" + codeasar, true);
-        xmlhttp.send();
-        codeasar = null;
-        coderater = null;
-    }
-</script>
-<script>
-    function SetEjmaliGroup1Rater3(coderater, codeasar) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-
-            }
-        }
-        xmlhttp.open("GET", "build/ajax/Set_ejmali/Rater3_Group1.php?coderater=" + coderater + "&codeasar=" + codeasar, true);
-        xmlhttp.send();
-        codeasar = null;
-        coderater = null;
-    }
-</script>
-<script>
-    function SetEjmaliGroup2Rater1(coderater, codeasar) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-
-            }
-        }
-        xmlhttp.open("GET", "build/ajax/Set_ejmali/Rater1_Group2.php?coderater=" + coderater + "&codeasar=" + codeasar, true);
-        xmlhttp.send();
-        codeasar = null;
-        coderater = null;
-    }
-</script>
-<script>
-    function SetEjmaliGroup2Rater2(coderater, codeasar) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-
-            }
-        }
-        xmlhttp.open("GET", "build/ajax/Set_ejmali/Rater2_Group2.php?coderater=" + coderater + "&codeasar=" + codeasar, true);
-        xmlhttp.send();
-        codeasar = null;
-        coderater = null;
-    }
-</script>
-<script>
-    function SetEjmaliGroup2Rater3(coderater, codeasar) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-
-            }
-        }
-        xmlhttp.open("GET", "build/ajax/Set_ejmali/Rater3_Group2.php?coderater=" + coderater + "&codeasar=" + codeasar, true);
-        xmlhttp.send();
-        codeasar = null;
-        coderater = null;
-    }
-</script>
+<script src="build/js/Set_Ejmali_Inc.js"></script>
 
 <?php include_once __DIR__ . '/footer.php'; ?>

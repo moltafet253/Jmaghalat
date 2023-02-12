@@ -44,6 +44,7 @@ if (isset($_POST) & !empty($_POST)) {
                 if ($user == $rows['username'] and $rows['type']==1){
                     $_SESSION['username']=$rows['username'];
                     $_SESSION['head']=$rows['type'];
+                    $_SESSION['group']=$rows['scientific_group'];
                     $_SESSION['islogin']=true;
                     $_SESSION['id']=$rows['id'];
                     $_SESSION['start']=time();

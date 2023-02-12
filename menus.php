@@ -2,106 +2,87 @@
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-        <li class="nav-item">
-            <a href="panel.php" class="nav-link <?php
-            if ($_SERVER['PHP_SELF'] == "/Jmaghalat/panel.php") {
-                echo "active";
+        <?php
+        $type = $_SESSION['head'];
+        $query = mysqli_query($connection_maghalat, "select * from menus where access like '%$type%'");
+        foreach ($query as $menus) {
+            if ($menus['Is_Parent'] == 0) {
+                ?>
+                <li class="nav-item">
+                    <a href="<?php echo $menus['link'] ?>"
+                       class="nav-link <?php $self = explode('/', $_SERVER['PHP_SELF']);
+                       $self = end($self);
+                       if ($self == $menus['link']) {
+                           echo 'active';
+                       } ?>">
+                        <i class="fa fa-home nav-icon"></i>
+                        <p><?php echo $menus['subject'] ?></p>
+                    </a>
+                </li>
+                <?php
+            } elseif ($menus['Is_Parent'] == 1 and $menus['childs'] != null and $menus['childs'] != '') {
+                $childs = explode('|', $menus['childs']);
+                ?>
+                <li class="nav-item has-treeview <?php
+                foreach ($childs as $child) {
+                    $query = mysqli_query($connection_maghalat, "Select * from menus where id='$child'");
+                    foreach ($query as $list) {
+                    }
+                    $self = explode('/', $_SERVER['PHP_SELF']);
+                    $self = end($self);
+                    if ($list['link'] == $self) {
+                        echo 'menu-open';
+                    }
+                }
+                ?>">
+                    <a href="#" class="nav-link <?php
+                    foreach ($childs as $child) {
+                        $query = mysqli_query($connection_maghalat, "Select * from menus where id='$child'");
+                        foreach ($query as $list) {
+                        }
+                        $self = explode('/', $_SERVER['PHP_SELF']);
+                        $self = end($self);
+                        if ($list['link'] == $self) {
+                            echo 'active';
+                        }
+                    }
+                    ?>">
+                        <i class="nav-icon fa fa-user-circle"></i>
+                        <p>
+                            <?php echo $menus['subject'] ?>
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <?php
+                        $childs = explode('|', $menus['childs']);
+                        foreach ($childs as $child_list) {
+                            $child_id = $child_list;
+                            $query = mysqli_query($connection_maghalat, "select * from menus where id='$child_id'");
+                            foreach ($query as $Child_Info) {
+                            }
+
+                            ?>
+                            <li class="nav-item">
+                                <a href="<?php
+                                echo $Child_Info['link'];
+                                ?>" class="nav-link <?php $self = explode('/', $_SERVER['PHP_SELF']);
+                                $self = end($self);
+                                if ($self == $Child_Info['link']) {
+                                    echo 'active';
+                                } ?>">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p><?php
+                                        echo $Child_Info['subject'];
+                                        ?></p>
+                                </a>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </li>
+                <?php
             }
-            ?>">
-                <i class="fa fa-home nav-icon"></i>
-                <p>صفحه اصلی</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="mag_manager.php" class="nav-link">
-                <i class="fa fa-book  nav-icon"></i>
-                <p>مدیریت مجلات</p>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="version_manager.php" class="nav-link">
-                <i class="fa fa-copy nav-icon"></i>
-                <p>مدیریت نسخه های نشریه</p>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="article_manager.php" class="nav-link">
-                <i class="fa fa-pencil-square  nav-icon"></i>
-                <p>مدیریت مقالات</p>
-            </a>
-        </li>
-
-        <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-user-circle"></i>
-                <p>
-                    اختصاص اثر به ارزیاب
-                    <i class="right fa fa-angle-left"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="set_ejmali.php" class="nav-link">
-                        <i class="fa fa-dot-circle-o nav-icon"></i>
-                        <p>اجمالی</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="set_tafsili.php" class="nav-link">
-                        <i class="fa fa-circle-o nav-icon"></i>
-                        <p>تفصیلی</p>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-bar-chart"></i>
-                <p>
-                    آمار و گزارشات
-                    <i class="right fa fa-angle-left"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="pages/charts/chartjs.html" class="nav-link">
-                        <i class="fa fa-circle-o nav-icon"></i>
-                        <p>ثبت اثر جدید</p>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-
-        <li class="nav-item">
-            <a href="user_manager.php" class="nav-link">
-                <i class="fa fa-user nav-icon"></i>
-                <p>مدیریت کاربران</p>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="festival_manager.php" class="nav-link">
-                <i class="fa fa-cogs  nav-icon"></i>
-                <p>مدیریت جشنواره</p>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="catalogs.php" class="nav-link">
-                <i class="fa fa-cogs  nav-icon"></i>
-                <p>مدیریت کاتالوگ ها</p>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="logout.php" class="nav-link">
-                <i class="fa fa-sign-in nav-icon"></i>
-                <p>خروج</p>
-            </a>
-        </li>
+        }
+        ?>
     </ul>
 </nav>
