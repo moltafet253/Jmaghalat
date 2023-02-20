@@ -15,7 +15,7 @@
                        if ($self == $menus['link']) {
                            echo 'active';
                        } ?>">
-                        <i class="fa fa-home nav-icon"></i>
+                        <i class="fa <?php echo $menus['icon'] ?> nav-icon"></i>
                         <p><?php echo $menus['subject'] ?></p>
                     </a>
                 </li>
@@ -47,7 +47,7 @@
                         }
                     }
                     ?>">
-                        <i class="nav-icon fa fa-user-circle"></i>
+                        <i class="nav-icon fa <?php echo $menus['icon'] ?>"></i>
                         <p>
                             <?php echo $menus['subject'] ?>
                             <i class="right fa fa-angle-left"></i>
@@ -64,14 +64,26 @@
 
                             ?>
                             <li class="nav-item">
-                                <a href="<?php
-                                echo $Child_Info['link'];
-                                ?>" class="nav-link <?php $self = explode('/', $_SERVER['PHP_SELF']);
+                                <a href="<?php $self = explode('/', $_SERVER['PHP_SELF']);
+                                $self = end($self);
+                                if ($self == $Child_Info['link']) {
+                                    echo '#';
+                                } else{
+                                    echo $Child_Info['link'];
+                                }?>" class="nav-link <?php $self = explode('/', $_SERVER['PHP_SELF']);
                                 $self = end($self);
                                 if ($self == $Child_Info['link']) {
                                     echo 'active';
                                 } ?>">
-                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <i class="fa
+                                      <?php $self = explode('/', $_SERVER['PHP_SELF']);
+                                    $self = end($self);
+                                    if ($self == $Child_Info['link']) {
+                                        echo 'fa-dot-circle-o';
+                                    }else{
+                                        echo 'fa-circle-o';
+                                    }?>
+                                      nav-icon"></i>
                                     <p><?php
                                         echo $Child_Info['subject'];
                                         ?></p>

@@ -145,7 +145,14 @@
                                     ?>
 
                                 </select>
+                                <?php
+                                $article_code = $Tafsili_list['id'];
+                                $query = mysqli_query($connection_maghalat, "select * from tafsili where article_code='$article_code' and type='t1g1'");
+                                foreach ($query as $T1G1) {
 
+                                }
+                                if (@$T1G1['sum']!=null):
+                                ?>
                                 <br/>
                                 <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- تفصیلی دوم</p>
                                 <select onchange="SetTafsiliGroup1Rater2(this.value,<?php echo $id = $Tafsili_list['article_id'] ?>)"
@@ -175,6 +182,15 @@
                                     <?php endforeach;
                                     ?>
                                 </select>
+                                <?php
+                                endif;
+                                $article_code = $Tafsili_list['id'];
+                                $query = mysqli_query($connection_maghalat, "select * from tafsili where article_code='$article_code' and type='t2g1'");
+                                foreach ($query as $T2G1) {
+
+                                }
+                                if (@$T2G1['sum']!=null):
+                                ?>
                                 <br/>
                                 <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- تفصیلی سوم</p>
                                 <select onchange="SetTafsiliGroup1Rater3(this.value,<?php echo $id = $Tafsili_list['article_id'] ?>)"
@@ -206,7 +222,9 @@
                                 </select>
                             </td>
 
-                            <?php if ($Tafsili_list['scientific_group_2'] != null or $Tafsili_list['scientific_group_2'] != ''): ?>
+                            <?php
+                            endif;
+                            if ($Tafsili_list['scientific_group_2'] != null or $Tafsili_list['scientific_group_2'] != ''): ?>
                                 <td>
                                     <p style="font-size: 14px;margin-bottom: -12px">
                                         نمره اجمالی:
@@ -242,6 +260,14 @@
                                         <?php endforeach;
                                         ?>
                                     </select>
+                                    <?php
+                                    $article_code = $Tafsili_list['id'];
+                                    $query = mysqli_query($connection_maghalat, "select * from tafsili where article_code='$article_code' and type='t1g2'");
+                                    foreach ($query as $T1G2) {
+
+                                    }
+                                    if (@$T1G2['sum']!=null):
+                                    ?>
                                     <br/>
                                     <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- تفصیلی دوم</p>
                                     <select onchange="SetTafsiliGroup2Rater2(this.value,<?php echo $id = $Tafsili_list['article_id'] ?>)"
@@ -271,6 +297,16 @@
                                         <?php endforeach;
                                         ?>
                                     </select>
+                                    <?php endif;
+
+                                    $article_code = $Tafsili_list['id'];
+                                    $query = mysqli_query($connection_maghalat, "select * from tafsili where article_code='$article_code' and type='t2g2'");
+                                    foreach ($query as $T2G2) {
+
+                                    }
+                                    if (@$T2G2['sum'] != null):
+
+                                    ?>
                                     <br/>
                                     <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- تفصیلی سوم</p>
                                     <select onchange="SetTafsiliGroup2Rater3(this.value,<?php echo $id = $Tafsili_list['article_id'] ?>)"
@@ -300,6 +336,7 @@
                                         <?php endforeach;
                                         ?>
                                     </select>
+                                    <?php endif; ?>
                                 </td>
                             <?php endif; ?>
                         </tr>

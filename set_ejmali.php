@@ -26,7 +26,7 @@
                 </tr>
                 <?php
                 $a = 1;
-                $query = mysqli_query($connection_mag, "select * from jashnvareh_maghalat.article c inner join mag_base.mag_articles m on c.article_id = m.id where m.selected_for_jm=1 and c.rate_status='اجمالی' order by m.id asc");
+                $query = mysqli_query($connection_mag, "select * from jashnvareh_maghalat.article c inner join mag_base.mag_articles m on c.article_id = m.id where m.selected_for_jm=1 and c.rate_status='اجمالی' and (c.ejmali1_g1_done=0 or c.ejmali2_g1_done=0 or c.ejmali3_g1_done=0 or c.ejmali1_g2_done=0 or c.ejmali2_g2_done=0 or c.ejmali3_g2_done=0) order by m.id asc");
                 foreach ($query as $Ejmali_list):
                     ?>
                     <tr>
@@ -45,18 +45,18 @@
                             <?php
                             $Group1=$Ejmali_list['scientific_group_1'];
                             $query=mysqli_query($connection_maghalat,"select * from scientific_group where id='$Group1'");
-                            foreach ($query as $Group1){}
-                            echo $Group1['name'];
-                            $Group1['name']=null;
+                            foreach ($query as $Group){}
+                            echo $Group['name'];
+                            $Group['name']=null;
                             ?>
                         </td>
                         <td>
                             <?php
                             $Group2=$Ejmali_list['scientific_group_2'];
                             $query=mysqli_query($connection_maghalat,"select * from scientific_group where id='$Group2'");
-                            foreach ($query as $Group2){}
-                            echo $Group2['name'];
-                            $Group2['name']=null;
+                            foreach ($query as $Group){}
+                            echo $Group['name'];
+                            $Group['name']=null;
                             ?>
                         </td>
                         <td>
@@ -95,7 +95,9 @@
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب اول</p>
                             <select onchange="SetEjmaliGroup1Rater1(this.value,<?php echo $id = $Ejmali_list['article_id']; ?>)"
                                     id="rater_group_1_1" name="rater_group_1_1" class="form-control select2"
-                                    style="width: auto;display: inline-block;margin-bottom: 8px">
+                                    style="width: auto;display: inline-block;margin-bottom: 8px"
+                                    <?php if ($Ejmali_list['ejmali1_g1_done']==1) echo 'disabled'; ?>
+                            >
                                 <option disabled selected>انتخاب کنید</option>
                                 <?php
                                 $query = mysqli_query($connection_maghalat, "select * from users where type=1 and approved=1");
@@ -110,7 +112,7 @@
                                         echo 'selected';
                                     }
                                     ?>
-                                            value="<?php echo $raters_info['id'] ?>">
+                                            value="<?php echo $raters_info['id']; ?>">
                                         <?php echo $raters_info['name'] . ' ' . $raters_info['family'];
 
                                         ?>
@@ -123,12 +125,14 @@
                             </select>
                             <br/>
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب دوم</p>
-                            <select onchange="SetEjmaliGroup1Rater2(this.value,<?php echo $id = $Ejmali_list['article_id'] ?>)"
+                            <select onchange="SetEjmaliGroup1Rater2(this.value,<?php echo $id = $Ejmali_list['article_id']; ?>)"
                                     id="rater_group_1_2" name="rater_group_1_2" class="form-control select2"
-                                    style="width: auto;display: inline-block;margin-bottom: 8px">
+                                    style="width: auto;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali2_g1_done']==1) echo 'disabled'; ?>
+                            >
                                 <option disabled selected>انتخاب کنید</option>
                                 <?php
-                                $query = mysqli_query($connection_maghalat, "select * from users where type=1 and approved=1");
+                                $ej1g1r=$rater1_info['ejmali1_ratercode_g1'];
+                                $query = mysqli_query($connection_maghalat, "select * from users where type=1 and approved=1 and id!='$ej1g1r'");
                                 foreach ($query as $raters_info):
                                     ?>
                                     <option <?php
@@ -140,7 +144,7 @@
                                         echo 'selected';
                                     }
                                     ?>
-                                            value="<?php echo $raters_info['id'] ?>">
+                                            value="<?php echo $raters_info['id']; ?>">
                                         <?php echo $raters_info['name'] . ' ' . $raters_info['family'];
                                         ?>
                                     </option>
@@ -154,10 +158,12 @@
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب سوم</p>
                             <select onchange="SetEjmaliGroup1Rater3(this.value,<?php echo $id = $Ejmali_list['article_id'] ?>)"
                                     id="rater_group_1_3" name="rater_group_1_3" class="form-control select2"
-                                    style="width: auto;display: inline-block;margin-bottom: 8px">
+                                    style="width: auto;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali3_g1_done']==1) echo 'disabled'; ?>>
                                 <option disabled selected>انتخاب کنید</option>
                                 <?php
-                                $query = mysqli_query($connection_maghalat, "select * from users where type=1 and approved=1");
+                                $ej1g1r=$rater1_info['ejmali1_ratercode_g1'];
+                                $ej2g1r=$rater1_info['ejmali2_ratercode_g1'];
+                                $query = mysqli_query($connection_maghalat, "select * from users where type=1 and approved=1 and id!='$ej1g1r' and id!='$ej2g1r'");
                                 foreach ($query as $raters_info):
                                     ?>
                                     <option <?php
@@ -169,7 +175,7 @@
                                         echo 'selected';
                                     }
                                     ?>
-                                            value="<?php echo $raters_info['id'] ?>">
+                                            value="<?php echo $raters_info['id']; ?>">
                                         <?php echo $raters_info['name'] . ' ' . $raters_info['family'];
                                         ?>
                                     </option>
@@ -185,7 +191,7 @@
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب اول</p>
                             <select onchange="SetEjmaliGroup2Rater1(this.value,<?php echo $id = $Ejmali_list['article_id'] ?>)"
                                     id="rater_group_2_1" name="rater_group_2_1" class="form-control select2"
-                                    style="width: auto;display: inline-block;margin-bottom: 8px">
+                                    style="width: auto;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali1_g2_done']==1) echo 'disabled'; ?>>
                                 <option disabled selected>انتخاب کنید</option>
                                 <?php
                                 $query = mysqli_query($connection_maghalat, "select * from users where type=1 and approved=1");
@@ -200,7 +206,7 @@
                                         echo 'selected';
                                     }
                                     ?>
-                                            value="<?php echo $raters_info['id'] ?>">
+                                            value="<?php echo $raters_info['id']; ?>">
                                         <?php echo $raters_info['name'] . ' ' . $raters_info['family'];
 
                                         ?>
@@ -215,10 +221,11 @@
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب دوم</p>
                             <select onchange="SetEjmaliGroup2Rater2(this.value,<?php echo $id = $Ejmali_list['article_id'] ?>)"
                                     id="rater_group_2_2" name="rater_group_2_2" class="form-control select2"
-                                    style="width: auto;display: inline-block;margin-bottom: 8px">
+                                    style="width: auto;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali2_g2_done']==1) echo 'disabled'; ?>>
                                 <option disabled selected>انتخاب کنید</option>
                                 <?php
-                                $query = mysqli_query($connection_maghalat, "select * from users where type=1 and approved=1");
+                                $ej1g2r=$rater1_info['ejmali1_ratercode_g2'];
+                                $query = mysqli_query($connection_maghalat, "select * from users where type=1 and approved=1 and id!='$ej1g2r'");
                                 foreach ($query as $raters_info):
                                     ?>
                                     <option <?php
@@ -230,7 +237,7 @@
                                         echo 'selected';
                                     }
                                     ?>
-                                            value="<?php echo $raters_info['id'] ?>">
+                                            value="<?php echo $raters_info['id']; ?>">
                                         <?php echo $raters_info['name'] . ' ' . $raters_info['family'];
                                         ?>
                                     </option>
@@ -244,10 +251,12 @@
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب سوم</p>
                             <select onchange="SetEjmaliGroup2Rater3(this.value,<?php echo $id = $Ejmali_list['article_id'] ?>)"
                                     id="rater_group_2_3" name="rater_group_2_3" class="form-control select2"
-                                    style="width: auto;display: inline-block;margin-bottom: 8px">
+                                    style="width: auto;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali3_g2_done']==1) echo 'disabled'; ?>>
                                 <option disabled selected>انتخاب کنید</option>
                                 <?php
-                                $query = mysqli_query($connection_maghalat, "select * from users where type=1 and approved=1");
+                                $ej1g2r=$rater1_info['ejmali1_ratercode_g2'];
+                                $ej2g2r=$rater1_info['ejmali2_ratercode_g2'];
+                                $query = mysqli_query($connection_maghalat, "select * from users where type=1 and approved=1 and id!='$ej1g2r' and id!='$ej2g2r'");
                                 foreach ($query as $raters_info):
                                     ?>
                                     <option <?php
@@ -259,7 +268,7 @@
                                         echo 'selected';
                                     }
                                     ?>
-                                            value="<?php echo $raters_info['id'] ?>">
+                                            value="<?php echo $raters_info['id']; ?>">
                                         <?php echo $raters_info['name'] . ' ' . $raters_info['family'];
                                         ?>
                                     </option>
@@ -277,6 +286,7 @@
                     $rater2_info = null;
                     $rater3_info = null;
                     $raters_info['id']=null;
+                    $query=null;
                     $id = null;
                 endforeach; ?>
                 </tbody>
