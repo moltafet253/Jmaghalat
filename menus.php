@@ -4,7 +4,7 @@
              with font-awesome or any other icon font library -->
         <?php
         $type = $_SESSION['head'];
-        $query = mysqli_query($connection_maghalat, "select * from menus where access like '%$type%'");
+        $query = mysqli_query($connection_maghalat, "select * from menus where access like '%$type%' order by level asc");
         foreach ($query as $menus) {
             if ($menus['Is_Parent'] == 0) {
                 ?>
@@ -25,7 +25,7 @@
                 ?>
                 <li class="nav-item has-treeview <?php
                 foreach ($childs as $child) {
-                    $query = mysqli_query($connection_maghalat, "Select * from menus where id='$child'");
+                    $query = mysqli_query($connection_maghalat, "Select * from menus where id='$child' order by level asc");
                     foreach ($query as $list) {
                     }
                     $self = explode('/', $_SERVER['PHP_SELF']);
@@ -37,7 +37,7 @@
                 ?>">
                     <a href="#" class="nav-link <?php
                     foreach ($childs as $child) {
-                        $query = mysqli_query($connection_maghalat, "Select * from menus where id='$child'");
+                        $query = mysqli_query($connection_maghalat, "Select * from menus where id='$child' order by level asc");
                         foreach ($query as $list) {
                         }
                         $self = explode('/', $_SERVER['PHP_SELF']);
@@ -47,7 +47,7 @@
                         }
                     }
                     ?>">
-                        <i class="nav-icon fa <?php echo $menus['icon'] ?>"></i>
+                        <i class="nav-icon fa <?php echo $menus['icon']; ?>"></i>
                         <p>
                             <?php echo $menus['subject'] ?>
                             <i class="right fa fa-angle-left"></i>
@@ -58,7 +58,7 @@
                         $childs = explode('|', $menus['childs']);
                         foreach ($childs as $child_list) {
                             $child_id = $child_list;
-                            $query = mysqli_query($connection_maghalat, "select * from menus where id='$child_id'");
+                            $query = mysqli_query($connection_maghalat, "select * from menus where id='$child_id' order by level asc");
                             foreach ($query as $Child_Info) {
                             }
 

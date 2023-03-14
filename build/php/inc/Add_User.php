@@ -8,6 +8,7 @@ if (isset($_POST['Add_User']) and !empty($_POST['username'])){
     $family=$_POST['family'];
     $mobile=$_POST['mobile'];
     $gender=$_POST['gender'];
+    $service_location=$_POST['service_location'];
     @$address=$_POST['address'];
     @$bank_name=$_POST['bank_name'];
     @$bank_id=$_POST['bank_id'];
@@ -25,8 +26,8 @@ if (isset($_POST['Add_User']) and !empty($_POST['username'])){
         header("Location: ../../../user_manager.php?UserFounded");
     }
     else{
-        mysqli_query($connection_maghalat,"insert into users (username, password, name, family, gender, national_code, phone, address, bank_name, bank_id, shaba, debit_card_id, scientific_group, type, date_added, registrar)
-        values ('$username','$password','$name','$family','$gender','$username','$mobile','$address','$bank_name','$bank_id','$shaba','$debit_card_id','$scientific_group','$type','$datewithtime','$registrar')");
+        mysqli_query($connection_maghalat,"insert into users (username, password, name, family, gender, national_code,service_location, phone, address, bank_name, bank_id, shaba, debit_card_id, scientific_group, type, date_added, registrar)
+        values ('$username','$password','$name','$family','$gender','$username','$service_location','$mobile','$address','$bank_name','$bank_id','$shaba','$debit_card_id','$scientific_group','$type','$datewithtime','$registrar')");
         header("Location: ../../../user_manager.php?UserAdded&user=$username");
     }
 }

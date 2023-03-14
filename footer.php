@@ -20,7 +20,7 @@
             ?>
             می باشد
             <br><br>
-            کلیه اطلاعات و حقوق این سامانه مربوط به دبیرخانه جشنواره مقالات علمی حوزه می باشد
+            کلیه حقوق اطلاعات این سامانه متعلق به دبیرخانه جشنواره مقالات علمی حوزه می باشد
         </strong>
     </center>
 </footer>
@@ -34,7 +34,6 @@
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.js"></script>
-
 <!-- OPTIONAL SCRIPTS -->
 <script src="dist/js/demo.js"></script>
 <!-- InputMask -->
@@ -62,6 +61,9 @@
 <script src="dist/js/persian-datepicker.min.js"></script>
 <!-- FastClick -->
 <script src="plugins/fastclick/fastclick.js"></script>
+<!--Customs-->
+<!--<script src="build/js/Customs.js"></script>-->
+
 </body>
 </html>
 <script>

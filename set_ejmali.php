@@ -95,7 +95,7 @@
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب اول</p>
                             <select onchange="SetEjmaliGroup1Rater1(this.value,<?php echo $id = $Ejmali_list['article_id']; ?>)"
                                     id="rater_group_1_1" name="rater_group_1_1" class="form-control select2"
-                                    style="width: auto;display: inline-block;margin-bottom: 8px"
+                                    style="width: 100%;display: inline-block;margin-bottom: 8px"
                                     <?php if ($Ejmali_list['ejmali1_g1_done']==1) echo 'disabled'; ?>
                             >
                                 <option disabled selected>انتخاب کنید</option>
@@ -127,7 +127,7 @@
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب دوم</p>
                             <select onchange="SetEjmaliGroup1Rater2(this.value,<?php echo $id = $Ejmali_list['article_id']; ?>)"
                                     id="rater_group_1_2" name="rater_group_1_2" class="form-control select2"
-                                    style="width: auto;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali2_g1_done']==1) echo 'disabled'; ?>
+                                    style="width: 100%;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali2_g1_done']==1) echo 'disabled'; ?>
                             >
                                 <option disabled selected>انتخاب کنید</option>
                                 <?php
@@ -158,7 +158,7 @@
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب سوم</p>
                             <select onchange="SetEjmaliGroup1Rater3(this.value,<?php echo $id = $Ejmali_list['article_id'] ?>)"
                                     id="rater_group_1_3" name="rater_group_1_3" class="form-control select2"
-                                    style="width: auto;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali3_g1_done']==1) echo 'disabled'; ?>>
+                                    style="width: 100%;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali3_g1_done']==1) echo 'disabled'; ?>>
                                 <option disabled selected>انتخاب کنید</option>
                                 <?php
                                 $ej1g1r=$rater1_info['ejmali1_ratercode_g1'];
@@ -191,7 +191,7 @@
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب اول</p>
                             <select onchange="SetEjmaliGroup2Rater1(this.value,<?php echo $id = $Ejmali_list['article_id'] ?>)"
                                     id="rater_group_2_1" name="rater_group_2_1" class="form-control select2"
-                                    style="width: auto;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali1_g2_done']==1) echo 'disabled'; ?>>
+                                    style="width: 100%;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali1_g2_done']==1) echo 'disabled'; ?>>
                                 <option disabled selected>انتخاب کنید</option>
                                 <?php
                                 $query = mysqli_query($connection_maghalat, "select * from users where type=1 and approved=1");
@@ -221,7 +221,7 @@
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب دوم</p>
                             <select onchange="SetEjmaliGroup2Rater2(this.value,<?php echo $id = $Ejmali_list['article_id'] ?>)"
                                     id="rater_group_2_2" name="rater_group_2_2" class="form-control select2"
-                                    style="width: auto;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali2_g2_done']==1) echo 'disabled'; ?>>
+                                    style="width: 100%;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali2_g2_done']==1) echo 'disabled'; ?>>
                                 <option disabled selected>انتخاب کنید</option>
                                 <?php
                                 $ej1g2r=$rater1_info['ejmali1_ratercode_g2'];
@@ -251,7 +251,7 @@
                             <p style="margin-bottom: -1px;margin-right: 5px;font-size: 14px">- ارزیاب سوم</p>
                             <select onchange="SetEjmaliGroup2Rater3(this.value,<?php echo $id = $Ejmali_list['article_id'] ?>)"
                                     id="rater_group_2_3" name="rater_group_2_3" class="form-control select2"
-                                    style="width: auto;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali3_g2_done']==1) echo 'disabled'; ?>>
+                                    style="width: 100%;display: inline-block;margin-bottom: 8px" <?php if ($Ejmali_list['ejmali3_g2_done']==1) echo 'disabled'; ?>>
                                 <option disabled selected>انتخاب کنید</option>
                                 <?php
                                 $ej1g2r=$rater1_info['ejmali1_ratercode_g2'];

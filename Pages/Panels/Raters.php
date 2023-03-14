@@ -19,7 +19,7 @@
                 $a = 1;
                 $MyGroup = $_SESSION['group'];
                 $Me = $_SESSION['id'];
-                $query = mysqli_query($connection_maghalat, "select * from article where rate_status like 'اجمالی' and ((ejmali1_ratercode_g1='$Me' and ejmali1_g1_done=0) or (ejmali2_ratercode_g1='$Me' and ejmali2_g1_done=0) or (ejmali3_ratercode_g1='$Me' and ejmali3_g1_done=0) or (ejmali1_ratercode_g2='$Me' and ejmali1_g2_done=0) or (ejmali2_ratercode_g2='$Me' and ejmali2_g2_done=0) or (ejmali3_ratercode_g2='$Me' and ejmali3_g2_done=0)) order by festival_id asc ");
+                $query = mysqli_query($connection_maghalat, "select * from article where rate_status like 'اجمالی' and ((ejmali1_ratercode_g1='$Me' and ejmali1_g1_done!=1) or (ejmali2_ratercode_g1='$Me' and ejmali2_g1_done!=1) or (ejmali3_ratercode_g1='$Me' and ejmali3_g1_done!=1) or (ejmali1_ratercode_g2='$Me' and ejmali1_g2_done!=1) or (ejmali2_ratercode_g2='$Me' and ejmali2_g2_done!=1) or (ejmali3_ratercode_g2='$Me' and ejmali3_g2_done!=1)) order by festival_id asc ");
                 foreach ($query as $Ejmali_list):
                     $id = $Ejmali_list['article_id'];
                     $query = mysqli_query($connection_mag, "select * from mag_articles where id='$id'");
@@ -89,7 +89,7 @@
                     </tr>
                 <?php
                 endforeach;
-                $query = mysqli_query($connection_maghalat, "select * from article where rate_status like '%تفصیلی%' and (tafsili1_ratercode_g1='$Me' or tafsili2_ratercode_g1='$Me' or tafsili3_ratercode_g1='$Me' or tafsili1_ratercode_g2='$Me' or tafsili2_ratercode_g2='$Me' or tafsili3_ratercode_g2='$Me') order by festival_id asc ");
+                $query = mysqli_query($connection_maghalat, "select * from article where rate_status='تفصیلی' and ((tafsili1_ratercode='$Me' and tafsili1_done!=1) or (tafsili2_ratercode='$Me' and tafsili2_done!=1) or (tafsili3_ratercode='$Me' and tafsili3_done!=1)) order by festival_id asc ");
                 foreach ($query as $Tafsili_list):
                     $id = $Tafsili_list['article_id'];
                     $query = mysqli_query($connection_mag, "select * from mag_articles where id='$id'");
@@ -111,14 +111,15 @@
                         </td>
                         <td>
                             <?php
-                            if ($Tafsili_list['tafsili1_ratercode_g1'] == $Me or $Tafsili_list['tafsili2_ratercode_g1'] == $Me or $Tafsili_list['tafsili3_ratercode_g1'] == $Me) {
+                            $GroupArray=explode('||',$_SESSION['group']);
+                            if (in_array($article['scientific_group_1'],$GroupArray)) {
                                 $groupID = $article['scientific_group_1'];
                                 $query = mysqli_query($connection_maghalat, "Select * from scientific_group where id='$groupID'");
                                 foreach ($query as $groupInfo) {
                                 }
                                 echo $groupInfo['name'];
-                            } elseif ($Tafsili_list['tafsili1_ratercode_g2'] == $Me or $Tafsili_list['tafsili2_ratercode_g2'] == $Me or $Tafsili_list['tafsili3_ratercode_g2'] == $Me) {
-                                $groupID = $article['scientific_group_2'];
+                            }elseif ($_SESSION['group']==$article['scientific_group_2']) {
+                                $groupID = $article['scientific_group_1'];
                                 $query = mysqli_query($connection_maghalat, "Select * from scientific_group where id='$groupID'");
                                 foreach ($query as $groupInfo) {
                                 }
@@ -136,18 +137,12 @@
                                 <input type="hidden" name="id" value="<?php echo $Tafsili_list['id']; ?>">
                                 <input type="hidden" name="rate_status"
                                        value="<?php
-                                       if ($Tafsili_list['tafsili1_ratercode_g1'] == $Me) {
-                                           echo 'ta1g1';
-                                       } elseif ($Tafsili_list['tafsili2_ratercode_g1'] == $Me) {
-                                           echo 'ta2g1';
-                                       } elseif ($Tafsili_list['tafsili3_ratercode_g1'] == $Me) {
-                                           echo 'ta3g1';
-                                       } elseif ($Tafsili_list['tafsili1_ratercode_g2'] == $Me) {
-                                           echo 'ta1g2';
-                                       } elseif ($Tafsili_list['tafsili2_ratercode_g2'] == $Me) {
-                                           echo 'ta2g2';
-                                       } elseif ($Tafsili_list['tafsili3_ratercode_g2'] == $Me) {
-                                           echo 'ta3g2';
+                                       if ($Tafsili_list['tafsili1_ratercode'] == $Me) {
+                                           echo 'ta1';
+                                       } elseif ($Tafsili_list['tafsili2_ratercode'] == $Me) {
+                                           echo 'ta2';
+                                       } elseif ($Tafsili_list['tafsili3_ratercode'] == $Me) {
+                                           echo 'ta3';
                                        }
                                        ?>"
                                 >

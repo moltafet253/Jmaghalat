@@ -64,6 +64,43 @@ elseif (isset($_GET['UserAdded'])):
                             </td>
                         </tr>
                         <tr>
+                            <th>
+                                گروه علمی*
+                            </th>
+                            <td>
+                                <select class="form-control select2" multiple="multiple"
+                                        data-placeholder="گروه (های) علمی را انتخاب کنید"
+                                        style="width: 100%;text-align: right" name="scientific_group[]"
+                                        id="scientific_group">
+                                    <?php
+                                    $query = mysqli_query($connection_maghalat, 'select * from scientific_group order by name asc');
+                                    foreach ($query as $group_items):
+                                        ?>
+                                        <option value="<?php echo $group_items['id']; ?>"><?php echo $group_items['name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                محل خدمت*
+                            </th>
+                            <td>
+                                <select class="form-control select2"
+                                        data-placeholder="محل خدمت را انتخاب کنید"
+                                        style="width: 100%;text-align: right" name="service_location"
+                                        id="service_location">
+                                    <option disabled selected>انتخاب کنید</option>
+                                    <?php
+                                    $query = mysqli_query($connection_variables, 'select * from service_location order by subject asc');
+                                    foreach ($query as $service_location_items):
+                                        ?>
+                                        <option value="<?php echo $service_location_items['id'] ?>"><?php echo $service_location_items['subject']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
                             <th>تلفن همراه*</th>
                             <td>
                                 <input type="text" class="form-control" id="mobile"
@@ -135,27 +172,6 @@ elseif (isset($_GET['UserAdded'])):
                                 </select>
                             </td>
                         </tr>
-                        <tr>
-                            <th>
-                                گروه علمی*
-                                <br><br>
-                                با گرفتن کلید کنترل می توانید چند گزینه را انتخاب نمایید.
-                            </th>
-                            <td>
-                                <select class="form-control select2" multiple="multiple"
-                                        data-placeholder="یک استان انتخاب کنید"
-                                        style="width: 100%;text-align: right" name="scientific_group[]"
-                                        id="scientific_group">
-                                    <?php
-                                    $query = mysqli_query($connection_maghalat, 'select * from scientific_group order by name asc');
-                                    foreach ($query as $group_items):
-                                        ?>
-                                        <option value="<?php echo $group_items['name'] ?>"><?php echo $group_items['name']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </td>
-                        </tr>
-
                     </table>
                 </center>
 
@@ -192,6 +208,7 @@ elseif (isset($_GET['UserAdded'])):
                             <th>کاربر</th>
                             <th>مشخصات</th>
                             <th>گروه علمی</th>
+                            <th>محل خدمت</th>
                             <th>شماره همراه</th>
                             <th>بانک</th>
                             <th>حساب</th>
@@ -214,6 +231,15 @@ elseif (isset($_GET['UserAdded'])):
                                     foreach ($groups as $itemgroups) {
                                         echo '<label style="width: 180px">' . '*' . $itemgroups . '</label>' . '<br>';
                                     }
+                                    ?></td>
+                                <td><?php
+                                    $service_location=$users['service_location'];
+                                    if ($service_location!=NULL){
+                                        $query=mysqli_query($connection_variables,"Select * from service_location where id='$service_location'");
+                                        foreach ($query as $Service_Location_Items){}
+                                        echo $Service_Location_Items['subject'];
+                                    }
+
                                     ?></td>
                                 <td><?php echo $users['phone'] ?></td>
                                 <td><?php echo $users['bank_name'] ?></td>
